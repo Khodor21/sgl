@@ -1,0 +1,6 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'>
+  <rect width='400' height='400' fill='#E8FEF0' rx='16'/>
+  <text x='200' y='180' font-size='100' text-anchor='middle' dominant-baseline='middle'>🖥️</text>
+  <text x='200' y='280' font-size='22' font-family='Arial' font-weight='bold' fill='#16A34A' text-anchor='middle'>Latitude 7490</text>
+  <rect x='60' y='310' width='280' height='4' rx='2' fill='#16A34A' opacity='0.3'/>
+</svg>

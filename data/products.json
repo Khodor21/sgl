@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "LENOVO THINKPAD L540 CORE i5 8GB 256GB SSD 15.6\"",
+    "price": 210,
+    "rating": 4.9,
+    "image": "/products/product-1.png",
+    "badge": "New"
+  },
+  {
+    "id": 2,
+    "title": "LENOVO THINKPAD X1 CARBON CORE i7-10610U 16GB RAM 512GB SSD NVME 14\" FHD",
+    "price": 399,
+    "rating": 4.4,
+    "image": "/products/product-2.png",
+    "badge": "Best Seller"
+  },
+  {
+    "id": 3,
+    "title": "LENOVO THINKPAD X13 YOGA CORE i7-10610U 13.3\" FLIP TOUCH 16GB RAM 256GB SSD NVME",
+    "price": 355,
+    "rating": 4.6,
+    "image": "/products/product-3.png",
+    "badge": "Hot"
+  },
+  {
+    "id": 4,
+    "title": "DELL LATITUDE 7490 CORE i7-8650U 16GB RAM 512GB SSD 14\" FHD",
+    "price": 299,
+    "rating": 4.7,
+    "image": "/products/product-4.png",
+    "badge": "Sale"
+  },
+  {
+    "id": 5,
+    "title": "HP ELITEBOOK 840 G6 CORE i5-8365U 8GB RAM 256GB SSD 14\" FHD",
+    "price": 249,
+    "rating": 4.5,
+    "image": "/products/product-5.png",
+    "badge": "New"
+  },
+  {
+    "id": 6,
+    "title": "APPLE MACBOOK PRO 13\" M2 CHIP 8GB RAM 256GB SSD SPACE GREY",
+    "price": 899,
+    "rating": 4.9,
+    "image": "/products/product-6.png",
+    "badge": "Best Seller"
+  }
+]

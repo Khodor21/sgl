@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@source "../app/**/*.{js,jsx}";
+@source "../data/**/*.json";
+
+@theme {
+  --font-sans: "Manrope", sans-serif;
+  --color-primary: #1b53fe;
+  --color-secondary: #aeaeae;
+  --color-app-black: #222222;
+  --color-app-grey: #f7f6fb;
+  --color-app-border: #aeaeae;
+}
+
+@layer base {
+  @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  :root {
+    --white: #ffffff;
+    --black: #222222;
+    --grey: #f7f6fb;
+    --border: #aeaeae;
+    --primary: #1b53fe;
+    --secondary: #aeaeae;
+  }
+
+  html {
+    font-family: "Manrope", sans-serif;
+  }
+
+  body {
+    font-family: "Manrope", sans-serif;
+    background-color: var(--white);
+    color: var(--black);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@layer components {
+  .product-card {
+    transition:
+      transform 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .product-card:hover {
+    transform: translateY(-4px) scale(1.012);
+    box-shadow:
+      0 16px 40px -8px rgba(27, 83, 254, 0.13),
+      0 4px 16px -4px rgba(34, 34, 34, 0.1);
+  }
+
+  .btn-cart {
+    position: relative;
+    overflow: hidden;
+    transition:
+      background 0.18s,
+      color 0.18s,
+      box-shadow 0.18s;
+  }
+  .btn-cart::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.18);
+    opacity: 0;
+    transition: opacity 0.18s;
+  }
+  .btn-cart:hover::after {
+    opacity: 1;
+  }
+
+  .btn-fav {
+    transition:
+      transform 0.18s,
+      color 0.18s,
+      background 0.18s;
+  }
+  .btn-fav:hover {
+    transform: scale(1.18);
+  }
+}
