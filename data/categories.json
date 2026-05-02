@@ -16,5 +16,17 @@
     "label": "Sgl Mouses",
     "slug": "mouses",
     "image": "./Categories/mouses.png"
+  },
+  {
+    "id": 4,
+    "label": "Gaming",
+    "slug": "gaming",
+    "image": "./Categories/Gaming.png"
+  },
+  {
+    "id": 5,
+    "label": "Macbooks",
+    "slug": "macbooks",
+    "image": "./Categories/Macbooks.png"
   }
 ]

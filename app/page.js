@@ -1,4 +1,3 @@
-import Navbar from "./components/Navbar";
 import HeroBanner from "./components/HeroBanner";
 import ProductGrid from "./components/ProductGrid";
 import CategoryStrip from "./components/CategoryStrip";

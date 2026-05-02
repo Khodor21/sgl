@@ -6,6 +6,7 @@
 @theme {
   --font-sans: "Manrope", sans-serif;
   --color-primary: #1b53fe;
+  --color-teal: #00ddef;
   --color-secondary: #aeaeae;
   --color-app-black: #222222;
   --color-app-grey: #f7f6fb;
@@ -24,6 +25,7 @@
   :root {
     --white: #ffffff;
     --black: #222222;
+    --teal: #00ddef;
     --grey: #f7f6fb;
     --border: #aeaeae;
     --primary: #1b53fe;
