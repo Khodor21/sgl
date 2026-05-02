@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "label": "Less than 200$",
+    "slug": "less-than-200",
+    "image": "./Categories/200less.png"
+  },
+  {
+    "id": 2,
+    "label": "Accessories",
+    "slug": "accessories",
+    "image": "./Categories/Accessories.png"
+  },
+  {
+    "id": 3,
+    "label": "Sgl Mouses",
+    "slug": "mouses",
+    "image": "./Categories/mouses.png"
+  }
+]

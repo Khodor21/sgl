@@ -27,7 +27,7 @@ export default function ProductCard({ product }) {
   return (
     <article className="product-card flex flex-col bg-white rounded-2xl border border-[#AEAEAE]/40 overflow-hidden h-full cursor-pointer">
       {/* Image Area */}
-      <div className="relative w-full aspect-square bg-[#f7f6fb] overflow-hidden">
+      <div className="relative w-full aspect-square overflow-hidden">
         {/* Badge */}
         {product.badge && (
           <span
@@ -56,17 +56,22 @@ export default function ProductCard({ product }) {
           src={product.image}
           alt={product.title}
           fill
-          className="object-contain p-5 transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 640px) 85vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 20vw"
+          className="object-contain px-4 py-3 transition-transform duration-300 group-hover:scale-105"
+          sizes="(max-width: 640px) 78vw, (max-width: 768px) 45vw, (max-width: 1024px) 31vw, (max-width: 1280px) 25vw, 20vw"
         />
       </div>
+
+      <div className="h-px bg-black opacity-20"></div>
 
       {/* Card Body */}
       <div className="flex flex-col flex-1 p-4 gap-2">
         {/* Rating */}
         <div className="flex items-center gap-1.5">
           <FaStar size={13} className="text-amber-400" />
-          <span className="text-xs font-600 text-[#222222]" style={{ fontWeight: 600 }}>
+          <span
+            className="text-xs font-600 text-[#222222]"
+            style={{ fontWeight: 600 }}
+          >
             {product.rating.toFixed(1)}
           </span>
           <span className="text-xs text-[#AEAEAE]">/5.0</span>
@@ -81,7 +86,10 @@ export default function ProductCard({ product }) {
         </h3>
 
         {/* Price */}
-        <p className="text-lg font-800 text-[#1B53FE] mt-auto" style={{ fontWeight: 800 }}>
+        <p
+          className="text-lg font-800 text-[#1B53FE] mt-auto"
+          style={{ fontWeight: 800 }}
+        >
           ${product.price.toLocaleString()}
         </p>
 
@@ -89,9 +97,10 @@ export default function ProductCard({ product }) {
         <button
           onClick={handleAddToCart}
           className={`btn-cart w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-700 mt-1 shadow-sm
-            ${added
-              ? "bg-emerald-500 text-white"
-              : "bg-[#1B53FE] text-white hover:bg-[#1244d4]"
+            ${
+              added
+                ? "bg-emerald-500 text-white"
+                : "bg-[#1B53FE] text-white hover:bg-[#1244d4]"
             }`}
           style={{ fontWeight: 700, transition: "background 0.22s" }}
         >

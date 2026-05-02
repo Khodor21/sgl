@@ -1,5 +1,6 @@
 import "./globals.css";
-
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 export const metadata = {
   title: "TechStore — Laptops & Computers",
   description: "Browse our curated selection of premium laptops and computers.",
@@ -20,7 +21,12 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen bg-white">{children}</body>
+      <body className="min-h-screen bg-white">
+        <Navbar />
+
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

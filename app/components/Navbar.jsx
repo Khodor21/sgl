@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { BsSearch } from "react-icons/bs";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { LuShoppingBag } from "react-icons/lu";
@@ -13,19 +13,17 @@ export default function Navbar() {
         <div className="hidden md:flex items-center justify-between h-16 gap-4">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 shrink-0">
-            <div className="w-8 h-8 rounded-lg bg-[#1B53FE] flex items-center justify-center">
-              <span
-                className="text-white font-800 text-sm"
-                style={{ fontWeight: 800 }}
-              >
-                T
-              </span>
-            </div>
+            <Image
+              src="/Logo.svg"
+              alt="TechStore Logo"
+              width={48}
+              height={48}
+            />
             <span
-              className="font-800 text-[#222222] text-lg"
+              className="font-800 text-black text-sm"
               style={{ fontWeight: 800 }}
             >
-              TechStore
+              SGL Store
             </span>
           </a>
 
@@ -69,20 +67,12 @@ export default function Navbar() {
           </div>
           {/* Center: Logo */}
           <a href="/" className="flex items-center gap-2 shrink-0">
-            <div className="w-8 h-8 rounded-lg bg-[#1B53FE] flex items-center justify-center">
-              <span
-                className="text-white font-800 text-sm"
-                style={{ fontWeight: 800 }}
-              >
-                T
-              </span>
-            </div>
-            <span
-              className="font-800 text-[#222222] text-lg"
-              style={{ fontWeight: 800 }}
-            >
-              TechStore
-            </span>
+            <Image
+              src="/Logo.svg"
+              alt="TechStore Logo"
+              width={48}
+              height={48}
+            />
           </a>
 
           {/* Right: User & Search & Menu */}
