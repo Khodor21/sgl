@@ -1,9 +1,6 @@
 import React from "react";
 
-interface InputIconProps {
-  icon: React.ReactNode;
-  children: React.ReactNode;
-}
+
 
 export default function InputIcon({ icon, children }: InputIconProps) {
   return (

@@ -46,10 +46,16 @@ export default function LeftPanel() {
           style={{ width: 38, height: 38, background: "var(--teal)" }}
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M10 2L17 6V14L10 18L3 14V6L10 2Z" fill="#222" opacity="0.9" />
+            <path
+              d="M10 2L17 6V14L10 18L3 14V6L10 2Z"
+              fill="#222"
+              opacity="0.9"
+            />
           </svg>
         </div>
-        <span className="text-lg font-extrabold text-white tracking-tight">ShopName</span>
+        <span className="text-lg font-extrabold text-white tracking-tight">
+          ShopName
+        </span>
       </div>
 
       {/* Headline */}
@@ -68,7 +74,8 @@ export default function LeftPanel() {
           className="text-sm leading-relaxed"
           style={{ color: "rgba(255,255,255,0.7)", maxWidth: 320 }}
         >
-          Join thousands of happy customers who shop smarter, faster and better with us.
+          Join thousands of happy customers who shop smarter, faster and better
+          with us.
         </p>
       </div>
 
@@ -83,13 +90,27 @@ export default function LeftPanel() {
           <div key={f} className="flex items-center gap-3">
             <div
               className="flex-shrink-0 rounded-full flex items-center justify-center"
-              style={{ width: 22, height: 22, background: "rgba(0,221,239,0.15)", border: "1.5px solid var(--teal)" }}
+              style={{
+                width: 22,
+                height: 22,
+                background: "rgba(0,221,239,0.15)",
+                border: "1.5px solid var(--teal)",
+              }}
             >
               <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-                <path d="M2 6l3 3 5-5" stroke="var(--teal)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path
+                  d="M2 6l3 3 5-5"
+                  stroke="var(--teal)"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </div>
-            <span className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.82)" }}>
+            <span
+              className="text-sm font-medium"
+              style={{ color: "rgba(255,255,255,0.82)" }}
+            >
               {f}
             </span>
           </div>

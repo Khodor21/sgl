@@ -1,21 +1,21 @@
 "use client";
+// app/auth/page.js
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import LeftPanel from "./components/LeftPanel";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 
 export default function AuthPage() {
   const [mode, setMode] = useState("login");
+  const router = useRouter();
 
   return (
-    <div
-      className="grid min-h-screen"
-      style={{ gridTemplateColumns: "1fr 1fr" }}
-    >
-      {/* ─── Left Panel ─── */}
+    <div className="grid min-h-screen lg:grid-cols-2">
+      {/* Left branding panel — hidden on mobile */}
       <LeftPanel />
 
-      {/* ─── Right Panel ─── */}
+      {/* Right form panel */}
       <div
         className="flex items-center justify-center bg-white px-6 py-12 lg:px-10"
         style={{ minHeight: "100vh" }}
@@ -26,7 +26,7 @@ export default function AuthPage() {
             className="flex gap-0 rounded-xl p-1 mb-8"
             style={{
               border: "1.5px solid #ebebeb",
-              background: "var(--app-grey)",
+              background: "var(--color-app-grey)",
             }}
           >
             {["login", "register"].map((t) => (
@@ -36,7 +36,10 @@ export default function AuthPage() {
                 className="flex-1 py-2.5 text-sm font-semibold rounded-[9px] transition-all duration-200 cursor-pointer"
                 style={{
                   background: mode === t ? "#fff" : "transparent",
-                  color: mode === t ? "var(--primary)" : "var(--secondary)",
+                  color:
+                    mode === t
+                      ? "var(--color-primary)"
+                      : "var(--color-secondary)",
                   boxShadow:
                     mode === t ? "0 1px 4px rgba(27,83,254,0.08)" : "none",
                   border: "none",
@@ -49,9 +52,15 @@ export default function AuthPage() {
 
           {/* Form Content */}
           {mode === "login" ? (
-            <LoginForm onSwitch={() => setMode("register")} />
+            <LoginForm
+              onSwitch={() => setMode("register")}
+              onSuccess={() => router.push("/")}
+            />
           ) : (
-            <RegisterForm onSwitch={() => setMode("login")} />
+            <RegisterForm
+              onSwitch={() => setMode("login")}
+              onSuccess={() => router.push("/")}
+            />
           )}
         </div>
       </div>

@@ -1,11 +1,8 @@
 import React from "react";
 
-interface PrimaryButtonProps {
-  children: React.ReactNode;
-  onClick?: () => void;
-}
 
-export default function PrimaryButton({ children, onClick }: PrimaryButtonProps) {
+
+export default function PrimaryButton({ children, onClick }) {
   return (
     <button
       type="submit"
