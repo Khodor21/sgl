@@ -2,7 +2,7 @@ import React from "react";
 
 
 
-export default function InputIcon({ icon, children }: InputIconProps) {
+export default function InputIcon({ icon, children }) {
   return (
     <div className="relative">
       <span

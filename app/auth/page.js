@@ -13,7 +13,7 @@ export default function AuthPage() {
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
       {/* Left branding panel — hidden on mobile */}
-      <LeftPanel />
+      {/* <LeftPanel /> */}
 
       {/* Right form panel */}
       <div

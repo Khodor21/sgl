@@ -1,244 +1,107 @@
-// import {
-//   MdPerson,
-//   MdEmail,
-//   MdLock,
-//   MdPhone,
-//   MdLocationOn,
-// } from "react-icons/md";
-// import Field from "./Field";
-// import InputIcon from "./InputIcon";
-// import PrimaryButton from "./PrimaryButton";
-// import Divider from "./Divider";
-// import GoogleButton from "./GoogleButton";
-
-// // All Lebanese governorates (محافظات لبنان)
-// const LEBANON_GOVERNORATES = [
-//   { value: "", label: "Select your governorate / اختر محافظتك" },
-//   { value: "beirut", label: "Beirut — بيروت" },
-//   { value: "mount_lebanon", label: "Mount Lebanon — جبل لبنان" },
-//   { value: "north", label: "North Lebanon — الشمال" },
-//   { value: "akkar", label: "Akkar — عكار" },
-//   { value: "south", label: "South Lebanon — الجنوب" },
-//   { value: "nabatieh", label: "Nabatieh — النبطية" },
-//   { value: "bekaa", label: "Bekaa — البقاع" },
-//   { value: "baalbek_hermel", label: "Baalbek-Hermel — بعلبك الهرمل" },
-// ];
-
-// export default function RegisterForm({ onSwitch }) {
-//   return (
-//     <div>
-//       <h2
-//         className="text-2xl font-extrabold mb-1"
-//         style={{ letterSpacing: "-0.5px", color: "var(--app-black)" }}
-//       >
-//         Create account
-//       </h2>
-//       <p className="text-sm mb-6" style={{ color: "var(--secondary)" }}>
-//         Join us — it only takes a minute
-//       </p>
-
-//       <form onSubmit={(e) => e.preventDefault()}>
-//         {/* First Name & Last Name */}
-//         <div className="grid grid-cols-2 gap-4">
-//           <Field label="First name">
-//             <InputIcon icon={<MdPerson size={18} color="#222" />}>
-//               <input type="text" placeholder="John" />
-//             </InputIcon>
-//           </Field>
-//           <Field label="Last name">
-//             <InputIcon icon={<MdPerson size={18} color="#222" />}>
-//               <input type="text" placeholder="Doe" />
-//             </InputIcon>
-//           </Field>
-//         </div>
-
-//         {/* Phone Number */}
-//         <Field label="Phone number">
-//           <div className="flex gap-2">
-//             {/* Lebanon country code badge */}
-//             <div
-//               className="flex items-center gap-1.5 px-3 rounded-[10px] flex-shrink-0 font-semibold text-sm"
-//               style={{
-//                 border: "1.5px solid #e8e8e8",
-//                 background: "#f9f9f9",
-//                 color: "var(--app-black)",
-//                 minWidth: "72px",
-//                 fontSize: "13px",
-//               }}
-//             >
-//               🇱🇧 +961
-//             </div>
-//             <InputIcon icon={<MdPhone size={18} color="#222" />}>
-//               <input
-//                 type="tel"
-//                 placeholder="70 123 456"
-//                 style={{ borderRadius: "10px" }}
-//               />
-//             </InputIcon>
-//           </div>
-//         </Field>
-
-//         {/* Email */}
-//         <Field label="Email address">
-//           <InputIcon icon={<MdEmail size={18} color="#222" />}>
-//             <input type="email" placeholder="you@example.com" />
-//           </InputIcon>
-//         </Field>
-
-//         {/* Governorate */}
-//         <Field label="Governorate / المحافظة">
-//           <InputIcon icon={<MdLocationOn size={18} color="#222" />}>
-//             <select defaultValue="">
-//               {LEBANON_GOVERNORATES.map((gov) => (
-//                 <option
-//                   key={gov.value}
-//                   value={gov.value}
-//                   disabled={gov.value === ""}
-//                 >
-//                   {gov.label}
-//                 </option>
-//               ))}
-//             </select>
-//           </InputIcon>
-//           {/* Dropdown arrow */}
-//           <span
-//             className="pointer-events-none absolute right-3.5"
-//             style={{ top: "50%", transform: "translateY(-50%)", opacity: 0.45 }}
-//           >
-//             <svg
-//               width="14"
-//               height="14"
-//               viewBox="0 0 24 24"
-//               fill="none"
-//               stroke="#222"
-//               strokeWidth="2.5"
-//             >
-//               <path
-//                 d="M6 9l6 6 6-6"
-//                 strokeLinecap="round"
-//                 strokeLinejoin="round"
-//               />
-//             </svg>
-//           </span>
-//         </Field>
-
-//         {/* Password */}
-//         <Field label="Password">
-//           <InputIcon icon={<MdLock size={18} color="#222" />}>
-//             <input type="password" placeholder="Min. 8 characters" />
-//           </InputIcon>
-//         </Field>
-
-//         <PrimaryButton>Create account</PrimaryButton>
-//       </form>
-
-//       <p
-//         className="text-center mt-4"
-//         style={{
-//           fontSize: "11.5px",
-//           color: "var(--secondary)",
-//           lineHeight: 1.6,
-//         }}
-//       >
-//         By creating an account you agree to our{" "}
-//         <a
-//           href="#"
-//           className="font-semibold"
-//           style={{ color: "var(--primary)" }}
-//         >
-//           Terms
-//         </a>{" "}
-//         and{" "}
-//         <a
-//           href="#"
-//           className="font-semibold"
-//           style={{ color: "var(--primary)" }}
-//         >
-//           Privacy Policy
-//         </a>
-//       </p>
-
-//       <Divider />
-//       <GoogleButton />
-
-//       <p
-//         className="text-center mt-5 text-sm"
-//         style={{ color: "var(--secondary)" }}
-//       >
-//         Already have an account?{" "}
-//         <button
-//           onClick={onSwitch}
-//           className="font-bold cursor-pointer"
-//           style={{
-//             color: "var(--primary)",
-//             background: "none",
-//             border: "none",
-//           }}
-//         >
-//           Sign in
-//         </button>
-//       </p>
-//     </div>
-//   );
-// }
-
 "use client";
 // app/auth/components/RegisterForm.js
 import { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "../../../context/AuthContext";
+import { useToast } from "../../../components/Toast";
 import {
   Field,
   InputIcon,
   PrimaryButton,
   Divider,
   GoogleButton,
-  ErrorBanner,
 } from "./LoginForm";
+import {
+  AiOutlineUser,
+  AiOutlinePhone,
+  AiOutlineEnvironment,
+  AiOutlineMail,
+  AiOutlineLock,
+  AiOutlineDown,
+} from "react-icons/ai";
+
+// ─── All 9 Lebanese governorates ───
+const LEBANON_GOVERNORATES = [
+  { value: "", label: "Select your governorate" },
+  { value: "beirut", label: "Beirut — بيروت" },
+  { value: "mount_lebanon", label: "Mount Lebanon — جبل لبنان" },
+  { value: "north", label: "North Lebanon — الشمال" },
+  { value: "akkar", label: "Akkar — عكار" },
+  { value: "south", label: "South Lebanon — الجنوب" },
+  { value: "nabatieh", label: "Nabatieh — النبطية" },
+  { value: "bekaa", label: "Bekaa — البقاع" },
+  { value: "baalbek_hermel", label: "Baalbek-Hermel — بعلبك الهرمل" },
+];
 
 export default function RegisterForm({ onSwitch, onSuccess }) {
   const { register, loginWithGoogle } = useAuth();
+  const { toast } = useToast();
+
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
+    phone: "",
+    governorate: "",
     email: "",
     password: "",
   });
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   function handleChange(e) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
+  // ─── Phone validation for Lebanon ───
+  function isValidLebanesPhone(phone) {
+    // Accepts: 70123456 / 03123456 / +96170123456 / 0096170123456
+    const cleaned = phone.replace(/\s/g, "");
+    return /^(\+961|00961|0)?[0-9]{7,8}$/.test(cleaned);
+  }
+
   async function handleRegister(e) {
     e.preventDefault();
-    setError("");
 
-    if (form.password.length < 8) {
-      setError("Password must be at least 8 characters.");
-      return;
-    }
+    // Client-side validation
+    if (!form.firstName.trim())
+      return toast.error("Please enter your first name.");
+    if (!form.lastName.trim())
+      return toast.error("Please enter your last name.");
+    if (!isValidLebanesPhone(form.phone))
+      return toast.error("Please enter a valid Lebanese phone number.");
+    if (!form.governorate)
+      return toast.error("Please select your governorate.");
+    if (!form.email.trim())
+      return toast.error("Please enter your email address.");
+    if (form.password.length < 8)
+      return toast.error("Password must be at least 8 characters.");
 
     setLoading(true);
     try {
-      await register(form.firstName, form.lastName, form.email, form.password);
+      await register({
+        firstName: form.firstName.trim(),
+        lastName: form.lastName.trim(),
+        phone: form.phone.trim(),
+        governorate: form.governorate,
+        email: form.email.trim(),
+        password: form.password,
+      });
+      toast.success("Account created! Welcome to the store 🎉");
       onSuccess();
     } catch (err) {
-      setError(getErrorMessage(err.code));
+      toast.error(getErrorMessage(err.code));
     } finally {
       setLoading(false);
     }
   }
 
   async function handleGoogle() {
-    setError("");
     setLoading(true);
     try {
       await loginWithGoogle();
+      toast.success("Signed in with Google successfully!");
       onSuccess();
     } catch (err) {
-      setError(getErrorMessage(err.code));
+      toast.error(getErrorMessage(err.code));
     } finally {
       setLoading(false);
     }
@@ -252,16 +115,15 @@ export default function RegisterForm({ onSwitch, onSuccess }) {
       >
         Create account
       </h2>
-      <p className="text-sm mb-7" style={{ color: "var(--color-secondary)" }}>
+      <p className="text-sm mb-6" style={{ color: "var(--color-secondary)" }}>
         Join us — it only takes a minute
       </p>
 
-      {error && <ErrorBanner message={error} />}
-
       <form onSubmit={handleRegister} noValidate>
+        {/* Name row */}
         <div className="grid grid-cols-2 gap-4">
           <Field label="First name">
-            <InputIcon icon={<UserIcon />}>
+            <InputIcon icon={<AiOutlineUser />}>
               <input
                 type="text"
                 name="firstName"
@@ -273,7 +135,7 @@ export default function RegisterForm({ onSwitch, onSuccess }) {
             </InputIcon>
           </Field>
           <Field label="Last name">
-            <InputIcon icon={<UserIcon />}>
+            <InputIcon icon={<AiOutlineUser />}>
               <input
                 type="text"
                 name="lastName"
@@ -286,8 +148,136 @@ export default function RegisterForm({ onSwitch, onSuccess }) {
           </Field>
         </div>
 
-        <Field label="Email address">
-          <InputIcon icon={<EmailIcon />}>
+        {/* Phone number with Lebanon prefix */}
+        <Field label="Phone number">
+          <div className="flex gap-2 items-stretch">
+            {/* Lebanon flag + code — static badge */}
+            <div
+              className="flex items-center gap-1.5 px-3 rounded-[10px] flex-shrink-0 font-semibold"
+              style={{
+                border: "1.5px solid #e8e8e8",
+                background: "#f9f9f9",
+                color: "#222",
+                fontSize: "13px",
+                minWidth: "78px",
+                height: "48px",
+              }}
+            >
+              🇱🇧 +961
+            </div>
+            {/* Phone input — no left padding override needed since prefix is outside */}
+            <div className="relative flex-1">
+              <span
+                className="pointer-events-none absolute left-3.5 z-10"
+                style={{
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  opacity: 0.38,
+                }}
+              >
+                <AiOutlinePhone />
+              </span>
+              <div className="auth-input-wrap">
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="70 123 456"
+                  value={form.phone}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <style>{`
+                .auth-input-wrap input {
+                  width: 100%;
+                  padding: 13px 14px 13px 42px;
+                  border: 1.5px solid #e8e8e8;
+                  border-radius: 10px;
+                  font-family: "Manrope", sans-serif;
+                  font-size: 14px;
+                  color: #222;
+                  background: #fff;
+                  outline: none;
+                  transition: border 0.18s, box-shadow 0.18s;
+                }
+                .auth-input-wrap input:focus {
+                  border-color: var(--color-primary);
+                  box-shadow: 0 0 0 3px rgba(27, 83, 254, 0.08);
+                }
+                .auth-input-wrap input::placeholder { color: #bbb; }
+                .auth-input-wrap select {
+                  width: 100%;
+                  padding: 13px 14px 13px 42px;
+                  border: 1.5px solid #e8e8e8;
+                  border-radius: 10px;
+                  font-family: "Manrope", sans-serif;
+                  font-size: 14px;
+                  color: #222;
+                  background: #fff;
+                  outline: none;
+                  transition: border 0.18s, box-shadow 0.18s;
+                  appearance: none;
+                  -webkit-appearance: none;
+                  cursor: pointer;
+                }
+                .auth-input-wrap select:focus {
+                  border-color: var(--color-primary);
+                  box-shadow: 0 0 0 3px rgba(27, 83, 254, 0.08);
+                }
+              `}</style>
+            </div>
+          </div>
+        </Field>
+
+        {/* Governorate */}
+        <Field label="Governorate / المحافظة">
+          <div className="relative">
+            <span
+              className="pointer-events-none absolute left-3.5 z-10"
+              style={{
+                top: "50%",
+                transform: "translateY(-50%)",
+                opacity: 0.38,
+              }}
+            >
+              <AiOutlineEnvironment />
+            </span>
+            <div className="auth-input-wrap">
+              <select
+                name="governorate"
+                value={form.governorate}
+                onChange={handleChange}
+                required
+                style={{ color: form.governorate ? "#222" : "#bbb" }}
+              >
+                {LEBANON_GOVERNORATES.map((gov) => (
+                  <option
+                    key={gov.value}
+                    value={gov.value}
+                    disabled={gov.value === ""}
+                  >
+                    {gov.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {/* Dropdown arrow */}
+            <span
+              className="pointer-events-none absolute right-3.5"
+              style={{
+                top: "50%",
+                transform: "translateY(-50%)",
+                opacity: 0.4,
+              }}
+            >
+              <AiOutlineDown size={14} />
+            </span>
+          </div>
+        </Field>
+
+        {/* Email */}
+        <Field label="Email">
+          <InputIcon icon={<AiOutlineMail />}>
             <input
               type="email"
               name="email"
@@ -299,8 +289,9 @@ export default function RegisterForm({ onSwitch, onSuccess }) {
           </InputIcon>
         </Field>
 
+        {/* Password */}
         <Field label="Password">
-          <InputIcon icon={<LockIcon />}>
+          <InputIcon icon={<AiOutlineLock />}>
             <input
               type="password"
               name="password"
@@ -378,44 +369,3 @@ function getErrorMessage(code) {
 }
 
 // ─── SVG Icons ───
-const UserIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="#222"
-    strokeWidth="2"
-  >
-    <circle cx="12" cy="7" r="4" />
-    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
-  </svg>
-);
-
-const EmailIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="#222"
-    strokeWidth="2"
-  >
-    <rect x="2" y="4" width="20" height="16" rx="2" />
-    <path d="M2 7l10 7 10-7" />
-  </svg>
-);
-
-const LockIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="#222"
-    strokeWidth="2"
-  >
-    <rect x="3" y="11" width="18" height="11" rx="2" />
-    <path d="M7 11V7a5 5 0 0110 0v4" />
-  </svg>
-);

@@ -2,24 +2,26 @@
 // app/auth/forgot-password/page.js
 import { useState } from "react";
 import Link from "next/link";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
+import { useToast } from "@/components/Toast";
 
 export default function ForgotPasswordPage() {
   const { forgotPassword } = useAuth();
+  const { toast } = useToast();
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setError("");
+    if (!email.trim()) return toast.error("Please enter your email address.");
     setLoading(true);
     try {
-      await forgotPassword(email);
+      await forgotPassword(email.trim());
       setSent(true);
-    } catch (err) {
-      setError("No account found with this email address.");
+      toast.success("Reset link sent! Check your inbox.");
+    } catch {
+      toast.error("No account found with this email address.");
     } finally {
       setLoading(false);
     }
@@ -35,14 +37,15 @@ export default function ForgotPasswordPage() {
         style={{ border: "1.5px solid #ebebeb" }}
       >
         {sent ? (
+          /* ── Success state ── */
           <div className="text-center">
             <div
               className="mx-auto mb-5 flex items-center justify-center rounded-full"
-              style={{ width: 56, height: 56, background: "#e8f0ff" }}
+              style={{ width: 64, height: 64, background: "#e8f0ff" }}
             >
               <svg
-                width="24"
-                height="24"
+                width="28"
+                height="28"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="var(--color-primary)"
@@ -50,55 +53,107 @@ export default function ForgotPasswordPage() {
               >
                 <path d="M22 13V6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2h9" />
                 <path d="M2 7l10 7 10-7" />
-                <path d="M16 19l2 2 4-4" />
+                <path
+                  d="M16 19l2 2 4-4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </div>
             <h2 className="text-xl font-extrabold mb-2">Check your inbox</h2>
             <p
-              className="text-sm mb-6"
+              className="text-sm mb-2"
               style={{ color: "var(--color-secondary)" }}
             >
-              We sent a reset link to <strong>{email}</strong>. Check your spam
-              folder if you don&apos;t see it.
+              We sent a password reset link to
+            </p>
+            <p className="text-sm font-bold mb-6" style={{ color: "#222" }}>
+              {email}
+            </p>
+            <p
+              className="text-xs mb-6"
+              style={{ color: "var(--color-secondary)" }}
+            >
+              Didn&apos;t receive it? Check your spam folder or{" "}
+              <button
+                onClick={() => setSent(false)}
+                className="font-semibold"
+                style={{
+                  color: "var(--color-primary)",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                try again
+              </button>
             </p>
             <Link
               href="/auth"
-              className="text-sm font-bold"
+              className="inline-flex items-center gap-1.5 text-sm font-bold"
               style={{ color: "var(--color-primary)" }}
             >
-              ← Back to sign in
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
+                <path
+                  d="M19 12H5M12 5l-7 7 7 7"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              Back to sign in
             </Link>
           </div>
         ) : (
+          /* ── Form state ── */
           <>
-            <h2
-              className="text-2xl font-extrabold mb-1"
-              style={{ letterSpacing: "-0.5px" }}
-            >
-              Reset password
-            </h2>
-            <p
-              className="text-sm mb-7"
-              style={{ color: "var(--color-secondary)" }}
-            >
-              Enter your email and we&apos;ll send you a reset link.
-            </p>
-
-            {error && (
-              <div
-                className="mb-5 px-4 py-3 rounded-xl text-sm font-medium"
-                style={{
-                  background: "#fff0f0",
-                  color: "#c0392b",
-                  border: "1.5px solid #f5c6c6",
-                }}
+            <div className="mb-6">
+              <Link
+                href="/auth"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold mb-6"
+                style={{ color: "var(--color-secondary)" }}
               >
-                {error}
-              </div>
-            )}
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                >
+                  <path
+                    d="M19 12H5M12 5l-7 7 7 7"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                Back to sign in
+              </Link>
+              <h2
+                className="text-2xl font-extrabold mb-1 mt-4"
+                style={{ letterSpacing: "-0.5px" }}
+              >
+                Reset password
+              </h2>
+              <p
+                className="text-sm"
+                style={{ color: "var(--color-secondary)" }}
+              >
+                Enter your email and we&apos;ll send you a reset link.
+              </p>
+            </div>
 
             <form onSubmit={handleSubmit} noValidate>
-              <label className="block text-xs font-semibold mb-1.5">
+              <label
+                className="block text-xs font-semibold mb-1.5"
+                style={{ color: "#222" }}
+              >
                 Email address
               </label>
               <div className="relative mb-6">
@@ -136,6 +191,16 @@ export default function ForgotPasswordPage() {
                     fontFamily: "Manrope, sans-serif",
                     fontSize: 14,
                     outline: "none",
+                    transition: "border 0.18s, box-shadow 0.18s",
+                    color: "#222",
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = "var(--color-primary)";
+                    e.target.style.boxShadow = "0 0 0 3px rgba(27,83,254,0.08)";
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = "#e8e8e8";
+                    e.target.style.boxShadow = "none";
                   }}
                 />
               </div>
@@ -143,31 +208,18 @@ export default function ForgotPasswordPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 rounded-xl text-white font-bold"
+                className="w-full py-3.5 rounded-xl text-white font-bold flex items-center justify-center gap-2"
                 style={{
                   background: loading ? "#7fa0fe" : "var(--color-primary)",
                   border: "none",
                   fontSize: 15,
-                  cursor: "pointer",
+                  cursor: loading ? "not-allowed" : "pointer",
+                  fontFamily: "Manrope, sans-serif",
                 }}
               >
                 {loading ? "Sending..." : "Send reset link"}
               </button>
             </form>
-
-            <p
-              className="text-center mt-5 text-sm"
-              style={{ color: "var(--color-secondary)" }}
-            >
-              Remember it?{" "}
-              <Link
-                href="/auth"
-                className="font-bold"
-                style={{ color: "var(--color-primary)" }}
-              >
-                Sign in
-              </Link>
-            </p>
           </>
         )}
       </div>

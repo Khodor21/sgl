@@ -2,6 +2,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { AuthProvider } from "../context/AuthContext";
+import { ToastProvider } from "../components/Toast";
 export const metadata = {
   title: "TechStore — Laptops & Computers",
   description: "Browse our curated selection of premium laptops and computers.",
@@ -24,10 +25,11 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-screen bg-white">
         <AuthProvider>
-          {" "}
-          <Navbar />
-          {children}
-          <Footer />
+          <ToastProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </ToastProvider>
         </AuthProvider>
       </body>
     </html>

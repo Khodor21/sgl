@@ -1,11 +1,7 @@
 import React from "react";
 
-interface FieldProps {
-  label: string;
-  children: React.ReactNode;
-}
 
-export default function Field({ label, children }: FieldProps) {
+export default function Field({ label, children }) {
   return (
     <div className="mb-4">
       <label
