@@ -8,33 +8,46 @@ export default function CategoryStrip() {
   const scrollRef = useRef(null);
   const [active, setActive] = useState(null);
 
-  // ✅ Auto scroll
   useEffect(() => {
     const container = scrollRef.current;
-    if (!container) return;
+    if (!container || container.children.length < 2) return;
+
+    const getScrollAmount = () => {
+      const first = container.children[0];
+      const second = container.children[1];
+      if (!first || !second) return 200;
+      return second.offsetLeft - first.offsetLeft;
+    };
 
     let interval;
+    let resetTimeout;
 
     const startScroll = () => {
       interval = setInterval(() => {
         if (!container) return;
 
-        container.scrollBy({
-          left: 200,
-          behavior: "smooth",
-        });
+        const scrollAmount = getScrollAmount();
+        const maxScroll = container.scrollWidth - container.clientWidth;
 
-        // loop back
-        if (
-          container.scrollLeft + container.clientWidth >=
-          container.scrollWidth - 10
-        ) {
-          container.scrollTo({ left: 0, behavior: "smooth" });
+        if (container.scrollLeft >= maxScroll - scrollAmount) {
+          container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+          resetTimeout = setTimeout(() => {
+            container.scrollTo({ left: 0, behavior: "smooth" });
+          }, 600);
+          clearInterval(interval);
+          resetTimeout = setTimeout(() => {
+            startScroll();
+          }, 1000);
+        } else {
+          container.scrollBy({ left: scrollAmount, behavior: "smooth" });
         }
       }, 2500);
     };
 
-    const stopScroll = () => clearInterval(interval);
+    const stopScroll = () => {
+      clearInterval(interval);
+      clearTimeout(resetTimeout);
+    };
 
     startScroll();
 
@@ -48,26 +61,29 @@ export default function CategoryStrip() {
     };
   }, []);
 
-  // ✅ Manual scroll (arrows)
   const scroll = (dir) => {
     const container = scrollRef.current;
-    if (!container) return;
+    if (!container || container.children.length < 2) return;
+
+    const scrollAmount =
+      container.children[1].offsetLeft - container.children[0].offsetLeft;
 
     container.scrollBy({
-      left: dir === "left" ? -300 : 300,
+      left: dir === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth",
     });
   };
 
   return (
     <div className="w-full mb-8">
-      {/* ✅ Header */}
       <div className="flex items-center justify-between mb-3">
-        <h1 className="text-black text-sm sm:text-base lg:text-lg font-extrabold">
+        <h1
+          className="text-lg text-[#222222] leading-tight"
+          style={{ fontWeight: 800 }}
+        >
           Top Categories
         </h1>
 
-        {/* Arrows only on laptops */}
         <div className="hidden lg:flex gap-2">
           <button
             onClick={() => scroll("left")}
@@ -84,10 +100,9 @@ export default function CategoryStrip() {
         </div>
       </div>
 
-      {/* ✅ Scroll row */}
       <div
         ref={scrollRef}
-        className="no-scrollbar flex gap-4 md:gap-10 overflow-x-auto scroll-smooth"
+        className="no-scrollbar flex gap-3 md:gap-6 overflow-x-auto scroll-smooth"
         style={{ scrollSnapType: "x mandatory" }}
       >
         {categories.map((cat) => {
@@ -100,10 +115,10 @@ export default function CategoryStrip() {
               className={`
                 relative flex-shrink-0
                 
-                basis-[28%]       
-                sm:basis-[22%]    
-                md:basis-[17%]    
-                lg:basis-[14%]    
+                basis-[22%]       
+                sm:basis-[18%]    
+                md:basis-[14%]    
+                lg:basis-[11%]    
                 
                 aspect-square
                 overflow-hidden

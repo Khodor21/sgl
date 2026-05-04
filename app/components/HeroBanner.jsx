@@ -17,9 +17,9 @@ export default function HeroBanner() {
   }, []);
 
   return (
-    <div className="w-full mb-10">
+    <div className="w-full mb-4">
       {/* Carousel container (2:1 ratio) */}
-      <div className="relative w-full aspect-[2/1] rounded overflow-hidden bg-black">
+      <div className="relative w-full aspect-[4/1.5] rounded overflow-hidden">
         {/* Slides */}
         {banners.map((img, i) => (
           <div
@@ -44,13 +44,13 @@ export default function HeroBanner() {
         <div className="absolute -bottom-8 -left-8 w-40 h-40 rounded-full bg-[#1B53FE]/10 blur-2xl" />
 
         {/* Dots navigation */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        <div className="absolute bottom-2 md:bottom-4 left-1/2 -translate-x-1/2 flex gap-1 md:gap-2 z-20">
           {banners.map((_, i) => (
             <button
               key={i}
               onClick={() => setIndex(i)}
               className={`
-                w-2.5 h-2.5 rounded-full transition-all
+               w-0.5 h-0.5 md:w-1.5 md:h-1.5 rounded-full transition-all
                 ${i === index ? "bg-[#1B53FE]" : "bg-white/50"}
               `}
             />
