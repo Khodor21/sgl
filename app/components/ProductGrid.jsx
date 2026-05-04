@@ -34,23 +34,23 @@ export default function ProductGrid({ title, bannerLabel, products }) {
         </button>
       </div>
 
-      {/* ── Laptop / Desktop: full-width CSS grid, no scroll ── */}
-      <div className="hidden lg:grid lg:grid-cols-4 xl:grid-cols-5 gap-4">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
-
-      {/* ── Mobile / Tablet: horizontal scroll ── */}
+      {/* ── All Devices: Horizontal scroll ── */}
       <div
         ref={scrollRef}
-        className="lg:hidden no-scrollbar flex gap-4 overflow-x-auto scroll-smooth pb-2"
+        className="no-scrollbar flex gap-4 overflow-x-auto scroll-smooth pb-2"
         style={{ scrollSnapType: "x mandatory" }}
       >
         {products.map((product) => (
           <div
             key={product.id}
-            className="flex-none w-[78vw] sm:w-[45vw] md:w-[31vw]"
+            className="
+              flex-none 
+              w-[78vw] 
+              sm:w-[45vw] 
+              md:w-[31vw] 
+              lg:w-[calc(20%-12.8px)] 
+              xl:w-[calc(20%-12.8px)]
+            "
             style={{ scrollSnapAlign: "start" }}
           >
             <ProductCard product={product} />

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FaStar } from "react-icons/fa";
-import { BsCartPlus } from "react-icons/bs";
+import { HiOutlineShoppingBag } from "react-icons/hi2";
 
 const BADGE_STYLES = {
   New: "bg-[#1B53FE] text-white",
@@ -25,9 +25,9 @@ export default function ProductCard({ product }) {
   const badgeStyle = BADGE_STYLES[product.badge] || "bg-[#AEAEAE] text-white";
 
   return (
-    <article className="product-card flex flex-col bg-white rounded-2xl border border-[#AEAEAE]/40 overflow-hidden h-full cursor-pointer">
+    <article className="product-card flex flex-col bg-white rounded border border-[#f5f5f5] overflow-hidden h-full cursor-pointer">
       {/* Image Area */}
-      <div className="relative w-full aspect-square overflow-hidden">
+      <div className="relative w-full h-44 overflow-hidden">
         {/* Badge */}
         {product.badge && (
           <span
@@ -42,7 +42,7 @@ export default function ProductCard({ product }) {
         <button
           onClick={() => setIsFavorite((f) => !f)}
           aria-label="Toggle favorite"
-          className="btn-fav absolute top-3 right-3 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-white/90 backdrop-blur-sm shadow border border-[#AEAEAE]/30"
+          className="btn-fav absolute top-3 right-3 z-10 w-7 h-7 flex items-center justify-center"
         >
           {isFavorite ? (
             <AiFillHeart size={18} className="text-rose-500" />
@@ -65,38 +65,39 @@ export default function ProductCard({ product }) {
 
       {/* Card Body */}
       <div className="flex flex-col flex-1 p-4 gap-2">
-        {/* Rating */}
-        <div className="flex items-center gap-1.5">
-          <FaStar size={13} className="text-amber-400" />
-          <span
-            className="text-xs font-600 text-[#222222]"
-            style={{ fontWeight: 600 }}
-          >
-            {product.rating.toFixed(1)}
-          </span>
-          <span className="text-xs text-[#AEAEAE]">/5.0</span>
-        </div>
-
         {/* Title */}
         <h3
           className="text-[13px] leading-snug text-[#222222] line-clamp-2"
-          style={{ fontWeight: 600, minHeight: "2.8em" }}
+          style={{ fontWeight: 800, minHeight: "2.8em" }}
         >
           {product.title}
         </h3>
-
-        {/* Price */}
-        <p
-          className="text-lg font-800 text-[#1B53FE] mt-auto"
-          style={{ fontWeight: 800 }}
-        >
-          ${product.price.toLocaleString()}
-        </p>
+        <div className="mt-1 flex w-full justify-between items-center">
+          {" "}
+          {/* Price */}
+          <p
+            className="text-base font-800 text-[#1B53FE] mt-auto"
+            style={{ fontWeight: 600 }}
+          >
+            ${product.price.toLocaleString()}
+          </p>
+          {/* Rating */}
+          <div className="flex items-center gap-1">
+            <FaStar size={10} className="text-amber-400" />
+            <span
+              className="text-[13px] font-600 text-[#222222]"
+              style={{ fontWeight: 600 }}
+            >
+              {product.rating.toFixed(1)}
+            </span>
+            <span className="text-[13px] text-[#AEAEAE]">/5.0</span>
+          </div>
+        </div>
 
         {/* Add to Cart */}
         <button
           onClick={handleAddToCart}
-          className={`btn-cart w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-700 mt-1 shadow-sm
+          className={`btn-cart w-full flex items-center justify-center gap-2 py-1.5 rounded-lg text-xs mt-1 shadow-sm
             ${
               added
                 ? "bg-emerald-500 text-white"
@@ -104,7 +105,7 @@ export default function ProductCard({ product }) {
             }`}
           style={{ fontWeight: 700, transition: "background 0.22s" }}
         >
-          <BsCartPlus size={16} />
+          <HiOutlineShoppingBag size={16} />
           {added ? "Added!" : "Add to Cart"}
         </button>
       </div>

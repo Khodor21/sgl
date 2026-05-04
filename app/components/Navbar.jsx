@@ -1,16 +1,33 @@
 "use client";
 
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { LuShoppingBag } from "react-icons/lu";
-import { LiaUserSolid } from "react-icons/lia";
+import { AiOutlineHeart } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
+import BottomNavbar from "./BottomNavbar";
+
+const categories = [
+  "All Categories",
+  "Stationary",
+  "Puzzles",
+  "Lunch Box",
+  "Toys",
+  "Water Bottles",
+  "Educational Toys",
+  "Baby Toys",
+  "Bags",
+  "Drawing",
+];
+
+const navLinks = ["Home", "About Us", "Contact Us", "Profile"];
 
 export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All Categories");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (searchOpen) {
@@ -28,88 +45,147 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-[#f7f6fb] backdrop-blur-sm border-b border-[#AEAEAE]/30">
-        <div className="w-full mx-auto px-2 sm:px-3 lg:px-4">
-          {/* Desktop Navbar */}
-          <div className="hidden md:flex items-center justify-between h-12">
-            {/* Left: Cart & User */}
-            <div className="flex items-center gap-1 ">
-              <button className="relative flex items-center justify-center rounded-xl hover:bg-[#ebe9f5] transition-colors duration-200">
-                <LuShoppingBag size={24} className="text-[#222222]" />
-                <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#1B53FE]" />
-              </button>
-              <button className=" flex items-center justify-center rounded-xl hover:bg-[#ebe9f5] transition-colors duration-200">
-                <LiaUserSolid size={28} className="text-[#222222]" />
-              </button>
-            </div>
+      {/* ───────────────────────────────────────────────────────────── */}
+      {/*  DESKTOP & TABLET HEADER (md and up)                         */}
+      {/* ───────────────────────────────────────────────────────────── */}
+      <header className="hidden md:block sticky top-0 z-50">
+        {/* ── Row 1: Main Nav ── */}
+        <div className="bg-primary border-b border-[#1b53fe]/40">
+          <div className="w-full max-w-screen-xl mx-auto px-4 lg:px-6">
+            <div className="flex items-center justify-between h-14 gap-4">
+              {/* Logo */}
+              <a href="/" className="flex items-center gap-2 shrink-0">
+                {/* Logo mark */}
+                <img alt="Logo" src="/Logo.svg" className="w-10 h-10" />
+                <span className="text-white font-bold text-xs">SGL Store</span>
+              </a>
 
-            {/* Center: Logo */}
-            <a href="/" className="flex items-center gap-2 shrink-0">
-              <Image
-                src="/Logo.svg"
-                alt="SGL Store Logo"
-                width={48}
-                height={48}
-              />
-              <span className="text-black text-sm" style={{ fontWeight: 800 }}>
-                SGL Store
-              </span>
-            </a>
+              {/* Nav Links */}
+              <nav className="flex items-center gap-6">
+                {navLinks.map((link) => (
+                  <a
+                    key={link}
+                    href="#"
+                    className="text-white text-sm font-medium hover:text-white/80 transition-colors duration-200 whitespace-nowrap"
+                  >
+                    {link}
+                  </a>
+                ))}
+              </nav>
 
-            {/* Right: Search & Menu */}
-            <div className="flex items-center gap-1 justify-end">
-              <button
-                onClick={() => setSearchOpen(true)}
-                className="flex items-center justify-center rounded-xl hover:bg-[#ebe9f5] transition-colors duration-200"
-              >
-                <BsSearch size={22} className="text-[#222222]" />
-              </button>
-              <button className="flex items-center justify-center rounded-xl hover:bg-[#ebe9f5] transition-colors duration-200">
-                <HiOutlineMenuAlt3 size={22} className="text-[#222222]" />
-              </button>
+              {/* Search Bar */}
+              <div className="flex-1 max-w-sm">
+                <div className="flex items-center bg-white rounded-lg overflow-hidden shadow-sm h-9">
+                  <input
+                    type="text"
+                    placeholder="Search Product..."
+                    className="flex-1 px-3 text-sm text-gray-700 placeholder-gray-400 outline-none bg-transparent"
+                    onFocus={() => setSearchOpen(true)}
+                    readOnly
+                  />
+                  <button
+                    onClick={() => setSearchOpen(true)}
+                    className="flex items-center justify-center w-9 h-9 bg-[#D0DCFF] hover:bg-primary transition-colors shrink-0"
+                  >
+                    <BsSearch size={15} className="text-primary" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Right Icons */}
+              <div className="flex items-center gap-3">
+                {/* Wishlist */}
+                <button className="flex items-center justify-center text-white hover:text-white/80 transition-colors duration-200">
+                  <AiOutlineHeart size={26} />
+                </button>
+                {/* Cart */}
+                <button className="relative flex items-center justify-center text-white hover:text-white/80 transition-colors duration-200">
+                  <LuShoppingBag size={24} />
+                  <span className="absolute -top-1 -right-1.5 w-2 h-2 rounded-full bg-red-500" />
+                </button>
+              </div>
             </div>
           </div>
+        </div>
 
-          {/* Mobile & Tablet Navbar */}
-          <div className="md:hidden flex items-center justify-between h-12">
-            {/* Left: Cart & User */}
-            <div className="flex items-center gap-1">
-              <button className="flex items-center justify-center rounded-xl hover:bg-[#ebe9f5] transition-colors duration-200">
-                <LiaUserSolid size={22} className="text-[#222222]" />
-              </button>
-              <button className="relative flex items-center justify-center rounded-xl hover:bg-[#ebe9f5] transition-colors duration-200">
-                <LuShoppingBag size={20} className="text-[#222222]" />
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#1B53FE]" />
-              </button>
-            </div>
-
-            {/* Center: Logo */}
-            <a href="/" className="flex items-center gap-2 shrink-0">
-              <Image
-                src="/Logo.svg"
-                alt="SGL Store Logo"
-                width={44}
-                height={44}
-              />
-            </a>
-
-            {/* Right: Search & Menu */}
-            <div className="flex items-center gap-1">
-              <button
-                onClick={() => setSearchOpen(true)}
-                className="flex items-center justify-center rounded-xl hover:bg-[#ebe9f5] transition-colors duration-200"
-              >
-                <BsSearch size={18} className="text-[#222222]" />
-              </button>
-              <button className="flex items-center justify-center rounded-xl hover:bg-[#ebe9f5] transition-colors duration-200">
-                <HiOutlineMenuAlt3 size={20} className="text-[#222222]" />
-              </button>
+        {/* ── Row 2: Category Bar ── */}
+        <div className="bg-[#D0DCFF]">
+          <div className="w-full max-w-screen-xl mx-auto px-4 lg:px-6">
+            <div className="flex items-center h-10 gap-0 overflow-x-auto scrollbar-hide">
+              {categories.map((cat, idx) => (
+                <div key={cat} className="flex items-center shrink-0">
+                  {idx === 0 && (
+                    <div className="flex items-center gap-2 pr-4 mr-1">
+                      <button
+                        onClick={() => setActiveCategory(cat)}
+                        className={`text-sm font-semibold whitespace-nowrap transition-colors duration-200 ${
+                          activeCategory === cat
+                            ? "text-black"
+                            : "text-black/80 hover:text-black"
+                        }`}
+                      >
+                        {cat}
+                      </button>
+                      <span className="text-black/40 text-lg font-light">
+                        |
+                      </span>
+                    </div>
+                  )}
+                  {idx !== 0 && (
+                    <button
+                      onClick={() => setActiveCategory(cat)}
+                      className={`px-3 text-sm whitespace-nowrap transition-colors duration-200 ${
+                        activeCategory === cat
+                          ? "text-black font-semibold"
+                          : "text-black/80 hover:text-black font-medium"
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </header>
 
-      {/* Search Modal */}
+      {/* ───────────────────────────────────────────────────────────── */}
+      {/*  MOBILE HEADER (below md)                                    */}
+      {/* ───────────────────────────────────────────────────────────── */}
+      <header className="md:hidden top-0 z-50 bg-white shadow-sm">
+        {/* ── Mobile Row 1: Logo + Favourite ── */}
+        <div className="flex items-center justify-between h-12 px-4 border-b border-gray-100">
+          {/* Logo */}
+          <a href="/" className="flex items-center gap-2 shrink-0">
+            {/* Logo mark */}
+            <img alt="Logo" src="/Logo.svg" className="w-10 h-10" />
+            <span className="text-white font-bold text-xs">SGL Store</span>
+          </a>
+
+          {/* Favourite Icon */}
+          <button className="relative flex items-center justify-center rounded-x transition-colors duration-200">
+            <AiOutlineHeart size={24} className="text-[#1b53fe]" />
+          </button>
+        </div>
+
+        {/* ── Mobile Row 2: Search Bar ── */}
+        <div className="flex items-center h-11 px-4 gap-2 bg-white ">
+          <div
+            className="flex items-center flex-1 bg-gray-100 rounded-lg h-8 gap-2 cursor-pointer"
+            onClick={() => setSearchOpen(true)}
+          >
+            <BsSearch size={14} className="text-gray-400 shrink-0" />
+            <span className="text-sm text-gray-400 select-none">
+              Search Product...
+            </span>
+          </div>
+        </div>
+      </header>
+
+      {/* ───────────────────────────────────────────────────────────── */}
+      {/*  SEARCH MODAL (shared for all breakpoints)                   */}
+      {/* ───────────────────────────────────────────────────────────── */}
       <div
         className={`fixed inset-0 z-[100] transition-all duration-300 ${
           searchOpen
@@ -126,7 +202,7 @@ export default function Navbar() {
           }}
         />
 
-        {/* Modal Content */}
+        {/* Modal */}
         <div
           className={`relative w-full max-w-2xl mx-auto mt-20 px-4 transition-all duration-300 ${
             searchOpen
@@ -136,8 +212,8 @@ export default function Navbar() {
         >
           <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
             {/* Search Input */}
-            <div className="flex items-center gap-3 px-5 py-4 border-b border-[#AEAEAE]/20">
-              <BsSearch size={18} className="text-[#AEAEAE] shrink-0" />
+            <div className="flex items-center gap-3 px-5 py-4 border-b border-gray-100">
+              <BsSearch size={18} className="text-gray-400 shrink-0" />
               <input
                 id="search-input"
                 type="text"
@@ -150,14 +226,14 @@ export default function Navbar() {
                     setSearchQuery("");
                   }
                 }}
-                className="flex-1 text-sm text-[#222222] placeholder-[#AEAEAE] outline-none bg-transparent"
+                className="flex-1 text-sm text-gray-800 placeholder-gray-400 outline-none bg-transparent"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="w-6 h-6 flex items-center justify-center rounded-full hover:bg-[#f7f6fb] transition-colors"
+                  className="w-6 h-6 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
                 >
-                  <IoClose size={14} className="text-[#AEAEAE]" />
+                  <IoClose size={14} className="text-gray-400" />
                 </button>
               )}
               <button
@@ -165,32 +241,32 @@ export default function Navbar() {
                   setSearchOpen(false);
                   setSearchQuery("");
                 }}
-                className="text-xs text-[#AEAEAE] hover:text-[#222222] px-2 py-1 rounded-lg hover:bg-[#f7f6fb] transition-colors font-medium"
+                className="text-xs text-gray-400 hover:text-gray-700 px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors font-medium"
               >
                 ESC
               </button>
             </div>
 
-            {/* Suggestions Area */}
+            {/* Suggestions */}
             <div className="px-5 py-4">
               {searchQuery === "" ? (
                 <div>
-                  <p className="text-xs font-semibold text-[#AEAEAE] uppercase tracking-wider mb-3">
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
                     Popular Searches
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      "iPhone 16",
-                      "MacBook Air",
-                      "AirPods Pro",
-                      "Samsung Galaxy",
-                      "PS5",
-                      "Mechanical Keyboard",
+                      "Lunch Box",
+                      "Puzzles",
+                      "Baby Toys",
+                      "Water Bottles",
+                      "Stationary",
+                      "Drawing Kit",
                     ].map((term) => (
                       <button
                         key={term}
                         onClick={() => setSearchQuery(term)}
-                        className="text-xs text-[#555555] bg-[#f7f6fb] hover:bg-[#ebe9f5] px-3 py-1.5 rounded-lg transition-colors duration-200"
+                        className="text-xs text-gray-600 bg-orange-50 hover:bg-orange-100 px-3 py-1.5 rounded-lg transition-colors duration-200"
                       >
                         {term}
                       </button>
@@ -199,10 +275,10 @@ export default function Navbar() {
                 </div>
               ) : (
                 <div>
-                  <p className="text-xs font-semibold text-[#AEAEAE] uppercase tracking-wider mb-3">
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
                     Results for &ldquo;{searchQuery}&rdquo;
                   </p>
-                  <div className="flex items-center justify-center py-8 text-[#AEAEAE]">
+                  <div className="flex items-center justify-center py-8 text-gray-400">
                     <p className="text-sm">No products found.</p>
                   </div>
                 </div>
@@ -211,6 +287,9 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+
+      {/* ── Bottom Navbar (mobile only) ── */}
+      <BottomNavbar />
     </>
   );
 }
