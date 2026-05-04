@@ -2,8 +2,8 @@
 // app/auth/forgot-password/page.js
 import { useState } from "react";
 import Link from "next/link";
-import { useAuth } from "@/context/AuthContext";
-import { useToast } from "@/components/Toast";
+import { useAuth } from "../../../context/AuthContext";
+import { useToast } from "../../../components/Toast";
 
 export default function ForgotPasswordPage() {
   const { forgotPassword } = useAuth();
