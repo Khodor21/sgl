@@ -3,29 +3,32 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  HiOutlineHome,
+  
   HiOutlineShoppingBag,
   HiOutlineViewGrid,
   HiOutlineUser,
 } from "react-icons/hi";
 
+import { GoHomeFill } from "react-icons/go";
+import { LuShoppingBag } from "react-icons/lu";
+
 const BottomNavbar = () => {
   const pathname = usePathname();
 
   const navItems = [
-    { label: "Home", icon: <HiOutlineHome size={24} />, href: "/" },
+    { label: "Home", icon: <GoHomeFill size={24} />, href: "/" },
     {
       label: "Categories",
       icon: <HiOutlineViewGrid size={24} />,
       href: "/categories",
     },
-    { label: "Cart", icon: <HiOutlineShoppingBag size={24} />, href: "/cart" },
+    { label: "Cart", icon: <LuShoppingBag size={24} />, href: "/cart" },
     { label: "Account", icon: <HiOutlineUser size={24} />, href: "/account" },
   ];
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#f5f5f5] rounded-t-lg shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
-      <div className="flex justify-around items-center h-16">
+      <div className="flex justify-around items-center h-12">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
 

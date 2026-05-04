@@ -2,23 +2,19 @@
 
 import { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
-import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { LuShoppingBag } from "react-icons/lu";
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
 import BottomNavbar from "./BottomNavbar";
 
 const categories = [
-  "All Categories",
-  "Stationary",
-  "Puzzles",
-  "Lunch Box",
-  "Toys",
-  "Water Bottles",
-  "Educational Toys",
-  "Baby Toys",
-  "Bags",
-  "Drawing",
+  "All Categories", // Usually best to keep this first for navigation
+  "Less than $200",
+  "HP Laptops",
+  "MacBooks",
+  "Gaming",
+  "Sgl Mouses",
+  "Accessories",
 ];
 
 const navLinks = ["Home", "About Us", "Contact Us", "Profile"];

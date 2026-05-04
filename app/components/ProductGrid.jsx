@@ -45,8 +45,8 @@ export default function ProductGrid({ title, bannerLabel, products }) {
             key={product.id}
             className="
               flex-none 
-              w-[78vw] 
-              sm:w-[45vw] 
+w-[50vw]             
+ sm:w-[45vw] 
               md:w-[31vw] 
               lg:w-[calc(20%-12.8px)] 
               xl:w-[calc(20%-12.8px)]
