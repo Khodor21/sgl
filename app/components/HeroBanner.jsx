@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const banners = ["/Banner-1.jpg", "/Banner-2.jpg"];
+const banners = ["/Banner-1.jpg"];
 
 export default function HeroBanner() {
   const [index, setIndex] = useState(0);

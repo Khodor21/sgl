@@ -6,7 +6,7 @@ import { LuShoppingBag } from "react-icons/lu";
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
 import BottomNavbar from "./BottomNavbar";
-
+import { useShop } from "../../context/ShopContext";
 const categories = [
   "All Categories", // Usually best to keep this first for navigation
   "Less than $200",
@@ -23,7 +23,7 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All Categories");
-  const [menuOpen, setMenuOpen] = useState(false);
+  const { cartCount, favCount } = useShop();
 
   useEffect(() => {
     if (searchOpen) {
@@ -91,13 +91,31 @@ export default function Navbar() {
               {/* Right Icons */}
               <div className="flex items-center gap-3">
                 {/* Wishlist */}
-                <button className="flex items-center justify-center text-white hover:text-white/80 transition-colors duration-200">
+                <button
+                  aria-label={`Wishlist (${favCount} items)`}
+                  className="relative flex items-center justify-center text-white hover:text-white/80 transition-colors duration-200"
+                >
                   <AiOutlineHeart size={26} />
+                  {favCount > 0 && (
+                    <span className="absolute -top-1 -right-1.5 min-w-[16px] h-4 flex items-center justify-center rounded-full bg-rose-500 text-white text-[9px] font-bold px-0.5">
+                      {favCount > 99 ? "99+" : favCount}
+                    </span>
+                  )}
                 </button>
                 {/* Cart */}
-                <button className="relative flex items-center justify-center text-white hover:text-white/80 transition-colors duration-200">
+                <button
+                  aria-label={`Cart (${cartCount} items)`}
+                  className="relative flex items-center justify-center text-white hover:text-white/80 transition-colors duration-200"
+                >
                   <LuShoppingBag size={24} />
-                  <span className="absolute -top-1 -right-1.5 w-2 h-2 rounded-full bg-red-500" />
+                  {cartCount > 0 ? (
+                    <span className="absolute -top-1 -right-1.5 min-w-[16px] h-4 flex items-center justify-center rounded-full bg-red-500 text-white text-[9px] font-bold px-0.5">
+                      {cartCount > 99 ? "99+" : cartCount}
+                    </span>
+                  ) : (
+                    // original static red dot when empty
+                    <span className="absolute -top-1 -right-1.5 w-2 h-2 rounded-full bg-red-500" />
+                  )}
                 </button>
               </div>
             </div>
@@ -160,20 +178,28 @@ export default function Navbar() {
           </a>
 
           {/* Favourite Icon */}
-          <button className="relative flex items-center justify-center rounded-x transition-colors duration-200">
+          <button
+            aria-label={`Wishlist (${favCount} items)`}
+            className="relative flex items-center justify-center"
+          >
             <AiOutlineHeart size={24} className="text-[#1b53fe]" />
+            {favCount > 0 && (
+              <span className="absolute -top-1 -right-1.5 min-w-[16px] h-4 flex items-center justify-center rounded-full bg-rose-500 text-white text-[9px] font-bold px-0.5">
+                {favCount > 99 ? "99+" : favCount}
+              </span>
+            )}
           </button>
         </div>
 
         {/* ── Mobile Row 2: Search Bar ── */}
         <div className="flex items-center h-11 px-4 gap-2 bg-white ">
           <div
-            className="flex items-center flex-1 bg-gray-100 rounded-lg h-8 gap-2 cursor-pointer"
+            className="flex flex-1 items-center bg-gray-100 rounded-lg h-8 cursor-pointer"
             onClick={() => setSearchOpen(true)}
           >
-            <BsSearch size={14} className="text-gray-400 shrink-0" />
-            <span className="text-sm text-gray-400 select-none">
-              Search Product...
+            <BsSearch size={12} className="text-gray-400 shrink-0 m-1" />
+            <span className="text-[13px] text-gray-400 select-none">
+              Search For A Product...
             </span>
           </div>
         </div>

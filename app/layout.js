@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { AuthProvider } from "../context/AuthContext";
 import { ToastProvider } from "../components/Toast";
+import { ShopProvider } from "../context/ShopContext";
 export const metadata = {
   title: "TechStore — Laptops & Computers",
   description: "Browse our curated selection of premium laptops and computers.",
@@ -25,11 +26,13 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-screen bg-white">
         <AuthProvider>
-          <ToastProvider>
-            <Navbar />
-            {children}
-            <Footer />
-          </ToastProvider>
+          <ShopProvider>
+            <ToastProvider>
+              <Navbar />
+              {children}
+              <Footer />
+            </ToastProvider>
+          </ShopProvider>
         </AuthProvider>
       </body>
     </html>

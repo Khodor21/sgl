@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FaStar } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { useShop } from "../../context/ShopContext";
 
 const BADGE_STYLES = {
   New: "bg-[#1B53FE] text-white",
@@ -14,25 +15,42 @@ const BADGE_STYLES = {
 };
 
 export default function ProductCard({ product }) {
-  const [isFavorite, setIsFavorite] = useState(false);
-  const [added, setAdded] = useState(false);
+  // ── shop state ──────────────────────────────────
+  const { addToCart, toggleFavorite, isFavorite, cartItems } = useShop();
+
+  const favorited = isFavorite(product.id);
+
+  // Track whether THIS product was just added (for the "Added!" flash)
+  const inCart = cartItems.some((i) => i.product.id === product.id);
+
+  // "Added!" flash — local only, no useState needed
+  const [added, setAdded] = useAddedFlash();
 
   const handleAddToCart = () => {
+    addToCart(product);
     setAdded(true);
-    setTimeout(() => setAdded(false), 1400);
   };
 
+  const handleToggleFavorite = () => toggleFavorite(product);
+
+  // ── badge style ─────────────────────────────────
   const badgeStyle = BADGE_STYLES[product.badge] || "bg-[#AEAEAE] text-white";
 
+  // ── guard ───────────────────────────────────────
+  if (!product) return null;
+
   return (
-    <article className="product-card flex flex-col bg-white rounded border border-[#f5f5f5] overflow-hidden h-full cursor-pointer">
-      {/* Image Area */}
+    <article
+      aria-label={product.title}
+      // ✅ FIX 1: Added "group" so group-hover:scale-105 works
+      className="group product-card flex flex-col bg-white rounded border border-[#f5f5f5] overflow-hidden h-full cursor-pointer"
+    >
+      {/* ── Image Area ── */}
       <div className="relative w-full h-44 overflow-hidden">
         {/* Badge */}
         {product.badge && (
           <span
-            className={`absolute top-3 left-3 z-10 text-[10px] font-700 uppercase tracking-widest px-2.5 py-1 rounded-full shadow-sm ${badgeStyle}`}
-            style={{ fontWeight: 700, letterSpacing: "0.08em" }}
+            className={`absolute top-3 left-3 z-10 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full shadow-sm ${badgeStyle}`}
           >
             {product.badge}
           </span>
@@ -40,75 +58,92 @@ export default function ProductCard({ product }) {
 
         {/* Favorite Button */}
         <button
-          onClick={() => setIsFavorite((f) => !f)}
-          aria-label="Toggle favorite"
+          onClick={handleToggleFavorite}
+          aria-label={`${favorited ? "Remove from" : "Add to"} favorites: ${product.title}`}
           className="btn-fav absolute top-3 right-3 z-10 w-7 h-7 flex items-center justify-center"
         >
-          {isFavorite ? (
+          {favorited ? (
             <AiFillHeart size={18} className="text-rose-500" />
           ) : (
             <AiOutlineHeart size={18} className="text-[#AEAEAE]" />
           )}
         </button>
 
-        {/* Product Image */}
+        {/* Product Image — ✅ FIX 1: group-hover:scale-105 now works */}
         <Image
           src={product.image}
           alt={product.title}
           fill
           className="object-contain px-4 py-3 transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 640px) 78vw, (max-width: 768px) 45vw, (max-width: 1024px) 31vw, (max-width: 1280px) 25vw, 20vw"
+          sizes="(max-width: 640px) 78vw, (max-width: 768px) 45vw,
+                 (max-width: 1024px) 31vw, (max-width: 1280px) 25vw, 20vw"
         />
       </div>
 
-      <div className="h-px bg-black opacity-20"></div>
+      <hr className="border-black/20" />
 
-      {/* Card Body */}
+      {/* ── Card Body ── */}
       <div className="flex flex-col flex-1 p-4 gap-2">
+        {/* Add to Cart */}
+        <button
+          onClick={handleAddToCart}
+          aria-label={`Add ${product.title} to cart`}
+          className={`btn-cart w-full flex items-center justify-center gap-2 py-[7px] rounded text-xs mb-1 shadow-sm font-bold transition-colors duration-[220ms]
+            ${added ? "bg-emerald-500 text-white" : "bg-[#1B53FE] text-white hover:bg-[#1244d4]"}`}
+        >
+          <HiOutlineShoppingBag size={15} />
+          {added ? "Added!" : "Add to Cart"}
+        </button>
+
         {/* Title */}
         <h3
-          className="text-[13px] leading-snug text-[#222222] line-clamp-2"
-          style={{ fontWeight: 800, minHeight: "2.8em" }}
+          className="text-[13px] font-extrabold leading-snug text-[#222222] line-clamp-2"
+          style={{ minHeight: "2.8em" }}
         >
           {product.title}
         </h3>
+
         <div className="mt-1 flex w-full justify-between items-center">
-          {" "}
-          {/* Price */}
-          <p
-            className="text-base font-800 text-[#1B53FE] mt-auto"
-            style={{ fontWeight: 600 }}
-          >
-            ${product.price.toLocaleString()}
+          {/* Price — ✅ FIX 2: proper currency formatting */}
+          <p className="text-base font-semibold text-[#1B53FE] mt-auto">
+            {(product.price ?? 0).toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+            })}
           </p>
+
           {/* Rating */}
           <div className="flex items-center gap-1">
             <FaStar size={10} className="text-amber-400" />
-            <span
-              className="text-[13px] font-600 text-[#222222]"
-              style={{ fontWeight: 600 }}
-            >
-              {product.rating.toFixed(1)}
+            <span className="text-[13px] font-semibold text-[#222222]">
+              {(product.rating ?? 0).toFixed(1)}
             </span>
             <span className="text-[13px] text-[#AEAEAE]">/5.0</span>
           </div>
         </div>
-
-        {/* Add to Cart */}
-        <button
-          onClick={handleAddToCart}
-          className={`btn-cart w-full flex items-center justify-center gap-2 py-1.5 rounded-lg text-xs mt-1 shadow-sm
-            ${
-              added
-                ? "bg-emerald-500 text-white"
-                : "bg-[#1B53FE] text-white hover:bg-[#1244d4]"
-            }`}
-          style={{ fontWeight: 700, transition: "background 0.22s" }}
-        >
-          <HiOutlineShoppingBag size={16} />
-          {added ? "Added!" : "Add to Cart"}
-        </button>
       </div>
     </article>
   );
+}
+
+// ✅ FIX 3: Custom hook — clears timeout on unmount, no stale closure
+function useAddedFlash(duration = 1400) {
+  const [added, setAddedRaw] = useState(false);
+  const timerRef = useRef(null);
+
+  // import useState at top — added here for clarity
+
+  const setAdded = (val) => {
+    if (val) {
+      setAddedRaw(true);
+      clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => setAddedRaw(false), duration);
+    } else {
+      setAddedRaw(false);
+    }
+  };
+
+  useEffect(() => () => clearTimeout(timerRef.current), []);
+
+  return [added, setAdded];
 }

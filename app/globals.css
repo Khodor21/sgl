@@ -14,7 +14,27 @@
 }
 
 @layer base {
-  @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap");
+
+  * {
+    font-family: "Montserrat", sans-serif;
+  }
+
+  h1,
+  h2 {
+    font-weight: 700;
+  }
+
+  h3 {
+    font-weight: 600;
+  }
+
+  p,
+  span,
+  a,
+  button {
+    font-weight: 500;
+  }
 
   *,
   *::before,
@@ -58,12 +78,6 @@
     transition:
       transform 0.22s cubic-bezier(0.4, 0, 0.2, 1),
       box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .product-card:hover {
-    transform: translateY(-4px) scale(1.012);
-    box-shadow:
-      0 16px 40px -8px rgba(27, 83, 254, 0.13),
-      0 4px 16px -4px rgba(34, 34, 34, 0.1);
   }
 
   .btn-cart {

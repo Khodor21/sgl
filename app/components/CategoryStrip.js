@@ -12,11 +12,13 @@ export default function CategoryStrip() {
     const container = scrollRef.current;
     if (!container || container.children.length < 2) return;
 
+    // Fixed calculation to scroll EXACTLY one image at a time
     const getScrollAmount = () => {
       const first = container.children[0];
-      const second = container.children[1];
-      if (!first || !second) return 200;
-      return second.offsetLeft - first.offsetLeft;
+      if (!first) return 200;
+      const itemWidth = first.offsetWidth;
+      const gap = parseFloat(getComputedStyle(container).gap) || 8;
+      return itemWidth + gap;
     };
 
     let interval;
@@ -31,13 +33,15 @@ export default function CategoryStrip() {
 
         if (container.scrollLeft >= maxScroll - scrollAmount) {
           container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+          clearInterval(interval);
+
           resetTimeout = setTimeout(() => {
             container.scrollTo({ left: 0, behavior: "smooth" });
           }, 600);
-          clearInterval(interval);
+
           resetTimeout = setTimeout(() => {
             startScroll();
-          }, 1000);
+          }, 1600); // Time to scroll back + pause before restarting
         } else {
           container.scrollBy({ left: scrollAmount, behavior: "smooth" });
         }
@@ -65,8 +69,11 @@ export default function CategoryStrip() {
     const container = scrollRef.current;
     if (!container || container.children.length < 2) return;
 
-    const scrollAmount =
-      container.children[1].offsetLeft - container.children[0].offsetLeft;
+    // Match the exact same 1-item calculation for the manual buttons
+    const first = container.children[0];
+    const itemWidth = first.offsetWidth;
+    const gap = parseFloat(getComputedStyle(container).gap) || 8;
+    const scrollAmount = itemWidth + gap;
 
     container.scrollBy({
       left: dir === "left" ? -scrollAmount : scrollAmount,
@@ -77,10 +84,7 @@ export default function CategoryStrip() {
   return (
     <div className="w-full mb-8">
       <div className="flex items-center justify-between mb-3">
-        <h1
-          className="text-lg text-[#222222] leading-tight"
-          style={{ fontWeight: 800 }}
-        >
+        <h1 className="text-base text-[#222222] leading-tight">
           Top Categories
         </h1>
 
@@ -102,7 +106,7 @@ export default function CategoryStrip() {
 
       <div
         ref={scrollRef}
-        className="no-scrollbar flex gap-3 md:gap-6 overflow-x-auto scroll-smooth"
+        className="no-scrollbar flex gap-2 sm:gap-3 md:gap-6 overflow-x-auto scroll-smooth"
         style={{ scrollSnapType: "x mandatory" }}
       >
         {categories.map((cat) => {
@@ -115,8 +119,8 @@ export default function CategoryStrip() {
               className={`
                 relative flex-shrink-0
                 
-                basis-[22%]       
-                sm:basis-[18%]    
+                basis-[20%]       
+                sm:basis-[20%]    
                 md:basis-[14%]    
                 lg:basis-[11%]    
                 

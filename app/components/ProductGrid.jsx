@@ -20,7 +20,7 @@ export default function ProductGrid({
       {/* ── Mono Banner (1.25 : 1.5) + Title side-by-side ── */}
       {isMono && bannerSrc && (
         <div className="flex flex-col sm:flex-row items-stretch gap-4 mb-5">
-          <div className="sm:w-[28%] w-full rounded-xl overflow-hidden flex-shrink-0">
+          <div className="sm:w-[28%] w-full rounded-xs overflow-hidden flex-shrink-0">
             <img
               src={bannerSrc}
               alt={title}
@@ -28,15 +28,9 @@ export default function ProductGrid({
               style={{ aspectRatio: "1.25 / 1.5" }}
             />
           </div>
-          <div className="flex-1 flex flex-col justify-center px-1 py-2">
-            <p
-              className="text-[10px] uppercase tracking-widest text-[#AEAEAE]"
-              style={{ fontWeight: 600 }}
-            >
-              {bannerLabel || ""}
-            </p>
+          <div className=" flex items-center justify-between py-2">
             <h2
-              className="text-2xl sm:text-3xl text-[#222222] leading-tight mt-1"
+              className="text-lg md:text-2xl text-[#222222] md:-tight mt-1"
               style={{ fontWeight: 800 }}
             >
               {title}
@@ -48,7 +42,7 @@ export default function ProductGrid({
               style={{ fontWeight: 700 }}
             >
               View All
-              <MdOutlineKeyboardArrowRight size={17} />
+              <MdOutlineKeyboardArrowRight classname="hidden md:block" size={17} />
             </button>
           </div>
         </div>
