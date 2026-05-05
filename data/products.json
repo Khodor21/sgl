@@ -1,50 +1,92 @@
 [
   {
     "id": 1,
-    "title": "LENOVO THINKPAD L540 CORE i5 8GB 256GB SSD 15.6\"",
-    "price": 210,
-    "rating": 4.9,
+    "title": "HP EliteBook 840 G8 Core i7-1165G7 16GB RAM 512GB SSD 14\" FHD",
+    "price": 549,
+    "category": "HP",
+    "rating": 4.8,
     "image": "/products/product-1.png",
     "badge": "New"
   },
   {
     "id": 2,
-    "title": "LENOVO THINKPAD X1 CARBON CORE i7-10610U 16GB RAM 512GB SSD NVME 14\" FHD",
-    "price": 399,
-    "rating": 4.4,
+    "title": "HP ProBook 450 G9 Core i5-1235U 8GB RAM 256GB SSD 15.6\" FHD",
+    "price": 499,
+    "category": "HP",
+    "rating": 4.5,
     "image": "/products/product-2.png",
-    "badge": "Best Seller"
+    "badge": "Sale"
   },
   {
     "id": 3,
-    "title": "LENOVO THINKPAD X13 YOGA CORE i7-10610U 13.3\" FLIP TOUCH 16GB RAM 256GB SSD NVME",
-    "price": 355,
+    "title": "HP Pavilion Laptop 15 Core i7-1355U 16GB RAM 1TB SSD 15.6\" Touch",
+    "price": 680,
+    "category": "HP",
     "rating": 4.6,
     "image": "/products/product-3.png",
     "badge": "Hot"
   },
   {
     "id": 4,
-    "title": "DELL LATITUDE 7490 CORE i7-8650U 16GB RAM 512GB SSD 14\" FHD",
-    "price": 299,
-    "rating": 4.7,
+    "title": "HP ZBook Firefly G10 Core i7-1365U 32GB RAM 1TB SSD 14\" Workstation",
+    "price": 1250,
+    "category": "HP",
+    "rating": 4.9,
     "image": "/products/product-4.png",
-    "badge": "Sale"
+    "badge": "Best Seller"
   },
   {
     "id": 5,
-    "title": "HP ELITEBOOK 840 G6 CORE i5-8365U 8GB RAM 256GB SSD 14\" FHD",
-    "price": 249,
-    "rating": 4.5,
+    "title": "HP Envy x360 2-in-1 Ryzen 7 7730U 16GB RAM 512GB SSD 15.6\" Touch",
+    "price": 720,
+    "category": "HP",
+    "rating": 4.7,
     "image": "/products/product-5.png",
     "badge": "New"
   },
   {
     "id": 6,
-    "title": "APPLE MACBOOK PRO 13\" M2 CHIP 8GB RAM 256GB SSD SPACE GREY",
-    "price": 899,
+    "title": "ASUS ROG Zephyrus G14 Ryzen 9 RTX 4060 16GB RAM 1TB SSD",
+    "price": 1450,
+    "category": "Gaming",
     "rating": 4.9,
     "image": "/products/product-6.png",
+    "badge": "Hot"
+  },
+  {
+    "id": 7,
+    "title": "MSI Katana 15 Core i7-13620H RTX 4050 16GB RAM 1TB SSD 144Hz",
+    "price": 999,
+    "category": "Gaming",
+    "rating": 4.4,
+    "image": "/products/product-7.png",
+    "badge": "Sale"
+  },
+  {
+    "id": 8,
+    "title": "Lenovo Legion Slim 5 Gen 8 Ryzen 7 RTX 4070 16GB RAM 512GB SSD",
+    "price": 1299,
+    "category": "Gaming",
+    "rating": 4.8,
+    "image": "/products/product-8.png",
     "badge": "Best Seller"
+  },
+  {
+    "id": 9,
+    "title": "Acer Predator Helios Neo 16 Core i7 RTX 4060 16GB RAM 1TB SSD",
+    "price": 1150,
+    "category": "Gaming",
+    "rating": 4.7,
+    "image": "/products/product-9.png",
+    "badge": "New"
+  },
+  {
+    "id": 10,
+    "title": "Razer Blade 15 Core i7-13800H RTX 4070 16GB RAM 1TB SSD QHD",
+    "price": 2399,
+    "category": "Gaming",
+    "rating": 4.9,
+    "image": "/products/product-10.png",
+    "badge": "Hot"
   }
 ]

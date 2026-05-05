@@ -12,22 +12,33 @@ export default function Home() {
         <CategoryStrip />
 
         <div className="flex flex-col gap-12">
-          <ProductGrid
-            title="Laptops"
-            bannerLabel="Most Popular"
-            products={products}
-          />
-          <ProductGrid
-            title="Best Sellers"
-            bannerLabel="Top Rated"
-            products={[...products].sort((a, b) => b.rating - a.rating)}
-          />
+          {/* New Arrivals — Mono banner (1.25:1.5) */}
           <ProductGrid
             title="New Arrivals"
             bannerLabel="Just In"
+            bannerSrc="/Mono-Banner 2.jpg"
+            bannerType="mono"
             products={products.filter(
               (p) => p.badge === "New" || p.badge === "Hot",
             )}
+          />
+
+          {/* Gaming — Wide banner (4:1.5) */}
+          <ProductGrid
+            title="Gaming"
+            bannerLabel="Most Popular"
+            bannerSrc="/Banner-2.jpg"
+            bannerType="wide"
+            products={products.filter((p) => p.category === "Gaming")}
+          />
+
+          {/* HP Laptops — Mono banner (1.25:1.5) */}
+          <ProductGrid
+            title="HP Laptops"
+            bannerLabel="Top Rated"
+            bannerSrc="/Mono-Banner.jpg"
+            bannerType="mono"
+            products={products.filter((p) => p.category === "HP")}
           />
         </div>
       </main>
