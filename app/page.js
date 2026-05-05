@@ -11,8 +11,7 @@ export default function Home() {
         <HeroBanner />
         <CategoryStrip />
 
-        <div className="flex flex-col gap-12">
-          {/* New Arrivals — Mono banner (1.25:1.5) */}
+        <div className="flex flex-col gap-6">
           <ProductGrid
             title="New Arrivals"
             bannerLabel="Just In"
