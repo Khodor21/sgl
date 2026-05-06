@@ -55,11 +55,11 @@ const BottomNavbar = () => {
             const isActive = pathname === item.href;
             const navContent = (
               <div className="flex flex-col items-center justify-center w-full h-full transition-colors duration-200 gap-1">
-                <div className={isActive ? "text-primary" : "text-app-black"}>
+                <div className={isActive ? "text-primary" : "text-black"}>
                   {item.icon}
                 </div>
                 <span
-                  className={`text-[13px] font-semibold ${
+                  className={`text-[13px] font-medium ${
                     isActive ? "text-primary" : "text-black"
                   }`}
                 >

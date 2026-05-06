@@ -5,7 +5,7 @@
     "price": 549,
     "category": "HP",
     "rating": 4.8,
-    "image": "/products/product-1.png",
+    "image": "/products/Product One.jpeg",
     "badge": "New"
   },
   {
@@ -14,7 +14,7 @@
     "price": 499,
     "category": "HP",
     "rating": 4.5,
-    "image": "/products/product-2.png",
+    "image": "/products/Product Two.jpeg",
     "badge": "Sale"
   },
   {
@@ -23,7 +23,7 @@
     "price": 680,
     "category": "HP",
     "rating": 4.6,
-    "image": "/products/product-3.png",
+    "image": "/products/Product Three.jpeg",
     "badge": "Hot"
   },
   {
@@ -32,7 +32,7 @@
     "price": 1250,
     "category": "HP",
     "rating": 4.9,
-    "image": "/products/product-4.png",
+    "image": "/products/Product Four.jpeg",
     "badge": "Best Seller"
   },
   {
@@ -41,7 +41,7 @@
     "price": 720,
     "category": "HP",
     "rating": 4.7,
-    "image": "/products/product-5.png",
+    "image": "/products/Product Five.jpeg",
     "badge": "New"
   },
   {
@@ -50,7 +50,7 @@
     "price": 1450,
     "category": "Gaming",
     "rating": 4.9,
-    "image": "/products/product-6.png",
+    "image": "/products/Product Six.jpeg",
     "badge": "Hot"
   },
   {
@@ -59,7 +59,7 @@
     "price": 999,
     "category": "Gaming",
     "rating": 4.4,
-    "image": "/products/product-7.png",
+    "image": "/products/Product Seven.jpeg",
     "badge": "Sale"
   },
   {
@@ -68,7 +68,7 @@
     "price": 1299,
     "category": "Gaming",
     "rating": 4.8,
-    "image": "/products/product-8.png",
+    "image": "/products/Product Eight.jpeg",
     "badge": "Best Seller"
   },
   {
@@ -77,7 +77,7 @@
     "price": 1150,
     "category": "Gaming",
     "rating": 4.7,
-    "image": "/products/product-9.png",
+    "image": "/products/Product Nine.jpeg",
     "badge": "New"
   },
   {
@@ -86,7 +86,7 @@
     "price": 2399,
     "category": "Gaming",
     "rating": 4.9,
-    "image": "/products/product-10.png",
+    "image": "/products/Product Ten.jpeg",
     "badge": "Hot"
   }
 ]

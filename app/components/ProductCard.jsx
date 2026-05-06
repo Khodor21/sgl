@@ -14,6 +14,15 @@ const BADGE_STYLES = {
   Sale: "bg-emerald-500 text-white",
 };
 
+function formatPrice(value) {
+  const formatted = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(value);
+  // Remove .00 cents if present (e.g., $549.00 → $549, but keep $549.75)
+  return formatted.replace(/\.00$/, "");
+}
+
 export default function ProductCard({ product }) {
   // ── shop state ──────────────────────────────────
   const { addToCart, toggleFavorite, isFavorite, cartItems } = useShop();
@@ -35,6 +44,8 @@ export default function ProductCard({ product }) {
 
   // ── badge style ─────────────────────────────────
   const badgeStyle = BADGE_STYLES[product.badge] || "bg-[#AEAEAE] text-white";
+
+  const formattedPrice = formatPrice(product.price ?? 0);
 
   // ── guard ───────────────────────────────────────
   if (!product) return null;
@@ -106,10 +117,7 @@ export default function ProductCard({ product }) {
         <div className="mt-1 flex w-full justify-between items-center">
           {/* Price — ✅ FIX 2: proper currency formatting */}
           <p className="text-base font-semibold text-[#1B53FE] mt-auto">
-            {(product.price ?? 0).toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-            })}
+            {formattedPrice}
           </p>
 
           {/* Rating */}
