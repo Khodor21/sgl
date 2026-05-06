@@ -28,7 +28,6 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { cartCount, favCount } = useShop();
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (searchOpen || mobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -45,7 +44,6 @@ export default function Navbar() {
     };
   }, [searchOpen, mobileMenuOpen]);
 
-  // Close mobile menu when a category is tapped
   const handleCategoryTap = (cat) => {
     setActiveCategory(cat);
     setMobileMenuOpen(false);
@@ -53,21 +51,16 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ───────────────────────────────────────────────────────────── */}
-      {/*  DESKTOP & TABLET HEADER (md and up)                         */}
-      {/* ───────────────────────────────────────────────────────────── */}
+      {/* ── DESKTOP HEADER ── */}
       <header className="hidden md:block sticky top-0 z-50">
-        {/* ── Row 1: Main Nav ── */}
         <div className="bg-primary border-b border-[#1b53fe]/40">
           <div className="w-full max-w-screen-xl mx-auto px-4 lg:px-6">
             <div className="flex items-center justify-between h-14 gap-4">
-              {/* Logo */}
               <a href="/" className="flex items-center gap-2 shrink-0">
                 <img alt="Logo" src="/Logo.svg" className="w-10 h-10" />
                 <span className="text-white font-bold text-xs">SGL Store</span>
               </a>
 
-              {/* Nav Links */}
               <nav className="flex items-center gap-6">
                 {navLinks.map((link) => (
                   <a
@@ -80,7 +73,6 @@ export default function Navbar() {
                 ))}
               </nav>
 
-              {/* Search Bar */}
               <div className="flex-1 max-w-sm">
                 <div className="flex items-center bg-white rounded-lg overflow-hidden shadow-sm h-9">
                   <input
@@ -99,7 +91,6 @@ export default function Navbar() {
                 </div>
               </div>
 
-              {/* Right Icons */}
               <div className="flex items-center gap-3">
                 <button
                   aria-label={`Wishlist (${favCount} items)`}
@@ -107,7 +98,7 @@ export default function Navbar() {
                 >
                   <AiOutlineHeart size={26} />
                   {favCount > 0 && (
-                    <span className="absolute -top-1 -right-1.5 rounded-full w-3 h-3 flex items-center justify-center rounded-full bg-rose-500 text-white text-[9px] font-bold px-0.5">
+                    <span className="absolute -top-1 -right-1.5 rounded-full w-3 h-3 flex items-center justify-center bg-rose-500 text-white text-[9px] font-bold px-0.5">
                       {favCount > 99 ? "99+" : favCount}
                     </span>
                   )}
@@ -118,7 +109,7 @@ export default function Navbar() {
                 >
                   <LuShoppingBag size={24} />
                   {cartCount > 0 ? (
-                    <span className="absolute -top-1 -right-1.5 rounded-ful w-3 h-3 flex items-center justify-center rounded-full bg-red-500 text-white text-[9px] font-bold px-0.5">
+                    <span className="absolute -top-1 -right-1.5 rounded-full w-3 h-3 flex items-center justify-center bg-red-500 text-white text-[9px] font-bold px-0.5">
                       {cartCount > 99 ? "99+" : cartCount}
                     </span>
                   ) : (
@@ -130,13 +121,12 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* ── Row 2: Category Bar ── */}
         <div className="bg-[#D0DCFF]">
           <div className="w-full max-w-screen-xl mx-auto px-4 lg:px-6">
             <div className="flex items-center h-10 gap-0 overflow-x-auto scrollbar-hide">
               {categories.map((cat, idx) => (
                 <div key={cat} className="flex items-center shrink-0">
-                  {idx === 0 && (
+                  {idx === 0 ? (
                     <div className="flex items-center gap-2 pr-4 mr-1">
                       <button
                         onClick={() => setActiveCategory(cat)}
@@ -152,8 +142,7 @@ export default function Navbar() {
                         |
                       </span>
                     </div>
-                  )}
-                  {idx !== 0 && (
+                  ) : (
                     <button
                       onClick={() => setActiveCategory(cat)}
                       className={`px-3 text-sm whitespace-nowrap transition-colors duration-200 ${
@@ -172,61 +161,67 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* ───────────────────────────────────────────────────────────── */}
-      {/*  MOBILE HEADER (below md)                                    */}
-      {/* ───────────────────────────────────────────────────────────── */}
-      <header className="md:hidden top-0 z-50 bg-white shadow-sm">
-        <div className="flex items-center justify-between h-12 px-4 border-b border-gray-100">
-          {/* Logo */}
-          <a href="/" className="flex items-center gap-2 shrink-0">
-            <img alt="Logo" src="/Logo.svg" className="w-10 h-10" />
+      {/* ── MOBILE HEADER ── */}
+      <header className="md:hidden sticky top-0 z-50 bg-primary">
+        {/* Row 1: Logo + Fav + Menu */}
+        <div className="flex items-center justify-between h-12 px-3">
+          <a href="/" className="flex items-center gap-1.5 shrink-0">
+            <img alt="Logo" src="/Logo.svg" className="w-8 h-8" />
             <span className="text-white font-bold text-xs">SGL Store</span>
           </a>
 
-          {/* Right Icons: Heart + Hamburger */}
-          <div className="flex flex-row-reverse items-center gap-1">
+          <div className="flex items-center gap-2">
+            {/* Fav */}
             <button
               aria-label={`Wishlist (${favCount} items)`}
-              className="relative flex items-center justify-center"
+              className="relative flex items-center justify-center text-white"
             >
-              <AiOutlineHeart size={24} className="text-[#1b53fe]" />
+              <AiOutlineHeart size={24} />
               {favCount > 0 && (
-                <span className="absolute -top-1 -right-1.5 rounded-full min-w-3 h-3 flex items-center justify-center rounded-full bg-rose-500 text-white text-[9px] font-bold px-0.5">
+                <span className="absolute -top-1 -right-1.5 min-w-3 h-3 flex items-center justify-center rounded-full bg-rose-500 text-white text-[9px] font-bold px-0.5">
                   {favCount > 99 ? "99+" : favCount}
                 </span>
               )}
             </button>
 
+            {/* Menu */}
             <button
               aria-label="Open menu"
               onClick={() => setMobileMenuOpen(true)}
-              className="flex items-center justify-center text-[#1b53fe]"
+              className="flex items-center justify-center text-white"
             >
               <HiMenuAlt3 size={24} />
             </button>
           </div>
         </div>
+
+        {/* Row 2: Search bar — full width, white, high contrast */}
+        <div className="px-3 pb-2.5">
+          <button
+            onClick={() => setSearchOpen(true)}
+            className="flex items-center w-full bg-white rounded-xl h-8 px-3 gap-2 shadow-sm"
+          >
+            <BsSearch size={14} className="text-[#1B53FE] shrink-0" />
+            <span className="text-gray-400 text-sm flex-1 text-left">
+              Search product...
+            </span>
+          </button>
+        </div>
       </header>
 
-      {/* ───────────────────────────────────────────────────────────── */}
-      {/*  MOBILE SIDE MENU – overlay + panel                          */}
-      {/* ───────────────────────────────────────────────────────────── */}
+      {/* ── MOBILE SIDE MENU ── */}
       {mobileMenuOpen && (
         <>
-          {/* Black overlay */}
           <div
             className="fixed inset-0 z-[60] bg-black/50 transition-opacity duration-300"
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
-
-          {/* Slide‑in panel from the right */}
           <aside
             className={`fixed top-0 right-0 z-[70] h-full w-72 max-w-[80vw] bg-white shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out ${
               mobileMenuOpen ? "translate-x-0" : "translate-x-full"
             }`}
           >
-            {/* Panel header */}
             <div className="flex items-center justify-between px-4 h-14 border-b border-gray-100 shrink-0">
               <h2 className="text-base font-semibold text-gray-900">
                 Categories
@@ -239,7 +234,6 @@ export default function Navbar() {
                 <IoClose size={20} className="text-gray-600" />
               </button>
             </div>
-            {/* Category list */}
             <nav className="flex-1 overflow-y-auto py-2">
               {categories.map((cat) => (
                 <button
@@ -255,23 +249,11 @@ export default function Navbar() {
                 </button>
               ))}
             </nav>
-            {/* <div className="border-t border-gray-100 shrink-0">
-              {navLinks.map((link) => (
-                <a
-                  key={link}
-                  href="#"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block px-5 py-3 text-sm text-gray-600 hover:text-[#1b53fe] hover:bg-gray-50 transition-colors duration-200"
-                >
-                  {link}
-                </a>
-              ))}
-            </div> */}
           </aside>
         </>
       )}
 
-      {/* ── Bottom Navbar (mobile only) ── */}
+      {/* ── Bottom Navbar ── */}
       <BottomNavbar />
     </>
   );

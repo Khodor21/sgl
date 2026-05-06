@@ -4,7 +4,7 @@
 @source "../data/**/*.json";
 
 @theme {
-  --font-sans: "Manrope", sans-serif;
+  --font-sans: "Urbanist", sans-serif;
   --color-primary: #1b53fe;
   --color-teal: #00ddef;
   --color-secondary: #aeaeae;
@@ -14,32 +14,13 @@
 }
 
 @layer base {
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap");
-
-  * {
-    font-family: "Montserrat", sans-serif;
-  }
-
-  h1,
-  h2 {
-    font-weight: 700;
-  }
-
-  h3 {
-    font-weight: 600;
-  }
-
-  p,
-  span,
-  a,
-  button {
-    font-weight: 500;
-  }
+  @import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600&display=swap");
 
   *,
   *::before,
   *::after {
     box-sizing: border-box;
+    font-family: "Urbanist", sans-serif;
   }
 
   :root {
@@ -52,18 +33,54 @@
     --secondary: #aeaeae;
   }
 
-  html {
-    font-family: "Manrope", sans-serif;
-  }
-
+  html,
   body {
-    font-family: "Manrope", sans-serif;
+    font-family: "Urbanist", sans-serif;
+    font-weight: 400;
     background-color: var(--white);
     color: var(--black);
+  }
+
+  h1,
+  h2 {
+    font-family: "Urbanist", sans-serif;
+    font-weight: 600; /* SemiBold */
+  }
+
+  h3 {
+    font-family: "Urbanist", sans-serif;
+    font-weight: 600; /* SemiBold */
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-family: "Urbanist", sans-serif;
+    font-weight: 500; /* Medium */
+  }
+
+  p,
+  span,
+  a,
+  button,
+  input,
+  label {
+    font-family: "Urbanist", sans-serif;
+    font-weight: 400; /* Regular */
   }
 }
 
 @layer utilities {
+  .font-regular {
+    font-weight: 400 !important;
+  }
+  .font-medium {
+    font-weight: 500 !important;
+  }
+  .font-semibold {
+    font-weight: 600 !important;
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }

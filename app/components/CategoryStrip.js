@@ -7,54 +7,54 @@ export default function CategoryStrip() {
   const [active, setActive] = useState(null);
 
   return (
-    <div className="w-full mb-8">
-      <div className="flex items-center justify-between mb-3">
-        <h1 className="text-base text-[#222222] leading-tight">
-          Our Categories
-        </h1>
-      </div>
+    <div className="w-full mb-6">
+      <h1 className="text-sm font-semibold text-[#222222] mb-2">
+        Our Categories
+      </h1>
 
-      {/* ── Mobile Layout: Grid with 3 images per line ── */}
-      <div className="md:hidden grid grid-cols-3 gap-2 sm:gap-3">
+      {/* ── Mobile: 3-column grid, compact fixed height ── */}
+      <div className="md:hidden grid grid-cols-3 gap-2">
         {categories.map((cat) => {
           const isActive = active === cat.slug;
-
           return (
             <button
               key={cat.id}
               onClick={() => setActive(isActive ? null : cat.slug)}
-              className="relative aspect-square overflow-hidden transition-all duration-200 rounded-xl"
+              className={`relative overflow-hidden rounded-lg transition-all duration-200 ${
+                isActive ? "ring-2 ring-[#1B53FE]" : ""
+              }`}
+              style={{ height: "56px" }}
             >
               <img
                 src={cat.image}
                 alt={cat.label}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-center"
               />
-
-              {isActive && <div className="absolute inset-0 bg-[#1B53FE]/10" />}
+              {isActive && <div className="absolute inset-0 bg-[#1B53FE]/15" />}
             </button>
           );
         })}
       </div>
 
-      {/* ── Desktop Layout: Flex row, justify-between, full screen width ── */}
-      <div className="hidden md:flex justify-between gap-4 w-full">
+      {/* ── Desktop: flex row ── */}
+      <div className="hidden md:flex justify-between gap-3 w-full">
         {categories.map((cat) => {
           const isActive = active === cat.slug;
-
           return (
             <button
               key={cat.id}
               onClick={() => setActive(isActive ? null : cat.slug)}
-              className="relative flex-1 aspect-square overflow-hidden transition-all duration-200 rounded-xl"
+              className={`relative flex-1 overflow-hidden rounded-xl transition-all duration-200 ${
+                isActive ? "ring-2 ring-[#1B53FE]" : ""
+              }`}
+              style={{ aspectRatio: "1 / 1" }}
             >
               <img
                 src={cat.image}
                 alt={cat.label}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-center"
               />
-
-              {isActive && <div className="absolute inset-0 bg-[#1B53FE]/10" />}
+              {isActive && <div className="absolute inset-0 bg-[#1B53FE]/15" />}
             </button>
           );
         })}

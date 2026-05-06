@@ -3,11 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HiOutlineViewGrid, HiOutlineUser } from "react-icons/hi";
-import { GoHomeFill } from "react-icons/go";
+import { RiUserFill } from "react-icons/ri";
+import { PiMonitorFill } from "react-icons/pi";
+import { MdHomeFilled } from "react-icons/md";
+import { PiPackageFill } from "react-icons/pi";
+
 import { LuShoppingBag } from "react-icons/lu";
-import { BiSearch } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
+import { RiShoppingBag3Fill } from "react-icons/ri";
 import { IoClose } from "react-icons/io5";
 import { useShop } from "../../context/ShopContext";
 
@@ -18,24 +21,19 @@ const BottomNavbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const navItems = [
-    { label: "Home", icon: <GoHomeFill size={24} />, href: "/" },
+    { label: "Home", icon: <MdHomeFilled size={23} />, href: "/" },
     {
       label: "Categories",
-      icon: <HiOutlineViewGrid size={24} />,
+      icon: <PiMonitorFill size={23} />,
       href: "/categories",
     },
-    {
-      label: "Search",
-      icon: <BiSearch size={24} />,
-      isSearch: true,
-    },
-    {
+   {
       label: "Cart",
       href: "/cart",
       hasCart: true,
       icon: (
         <span className="relative flex items-center justify-center leading-none">
-          <LuShoppingBag size={24} />
+          <RiShoppingBag3Fill size={23} />
           {cartCount > 0 && (
             <span className="absolute -top-1.5 -right-1.5 w-3 h-3 flex items-center justify-center rounded-full bg-red-500 text-white text-[9px] font-bold px-0.5 leading-none">
               {cartCount > 9 ? "9+" : cartCount}
@@ -43,8 +41,13 @@ const BottomNavbar = () => {
           )}
         </span>
       ),
+    }, {
+      label: "My Orders",
+      icon: <PiPackageFill size={23} />,
+      isSearch: true,
     },
-    { label: "Account", icon: <HiOutlineUser size={24} />, href: "/account" },
+    
+    { label: "Account", icon: <RiUserFill size={23} />, href: "/account" },
   ];
 
   return (
@@ -55,12 +58,12 @@ const BottomNavbar = () => {
             const isActive = pathname === item.href;
             const navContent = (
               <div className="flex flex-col items-center justify-center w-full h-full transition-colors duration-200 gap-1">
-                <div className={isActive ? "text-primary" : "text-black"}>
+                <div className={isActive ? "text-primary" : "text-black/75"}>
                   {item.icon}
                 </div>
                 <span
                   className={`text-[12px] ${
-                    isActive ? "text-primary" : "text-black/80"
+                    isActive ? "text-primary" : "text-black/75"
                   }`}
                 >
                   {item.label}
