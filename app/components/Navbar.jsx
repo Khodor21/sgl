@@ -5,10 +5,12 @@ import { BsSearch } from "react-icons/bs";
 import { LuShoppingBag } from "react-icons/lu";
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
+import { HiMenuAlt3 } from "react-icons/hi";
 import BottomNavbar from "./BottomNavbar";
 import { useShop } from "../../context/ShopContext";
+
 const categories = [
-  "All Categories", // Usually best to keep this first for navigation
+  "All Categories",
   "Less than $200",
   "HP Laptops",
   "MacBooks",
@@ -23,21 +25,31 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All Categories");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { cartCount, favCount } = useShop();
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    if (searchOpen) {
+    if (searchOpen || mobileMenuOpen) {
       document.body.style.overflow = "hidden";
-      setTimeout(() => {
-        document.getElementById("search-input")?.focus();
-      }, 100);
+      if (searchOpen) {
+        setTimeout(() => {
+          document.getElementById("search-input")?.focus();
+        }, 100);
+      }
     } else {
       document.body.style.overflow = "";
     }
     return () => {
       document.body.style.overflow = "";
     };
-  }, [searchOpen]);
+  }, [searchOpen, mobileMenuOpen]);
+
+  // Close mobile menu when a category is tapped
+  const handleCategoryTap = (cat) => {
+    setActiveCategory(cat);
+    setMobileMenuOpen(false);
+  };
 
   return (
     <>
@@ -51,7 +63,6 @@ export default function Navbar() {
             <div className="flex items-center justify-between h-14 gap-4">
               {/* Logo */}
               <a href="/" className="flex items-center gap-2 shrink-0">
-                {/* Logo mark */}
                 <img alt="Logo" src="/Logo.svg" className="w-10 h-10" />
                 <span className="text-white font-bold text-xs">SGL Store</span>
               </a>
@@ -90,30 +101,27 @@ export default function Navbar() {
 
               {/* Right Icons */}
               <div className="flex items-center gap-3">
-                {/* Wishlist */}
                 <button
                   aria-label={`Wishlist (${favCount} items)`}
                   className="relative flex items-center justify-center text-white hover:text-white/80 transition-colors duration-200"
                 >
                   <AiOutlineHeart size={26} />
                   {favCount > 0 && (
-                    <span className="absolute -top-1 -right-1.5 min-w-[16px] h-4 flex items-center justify-center rounded-full bg-rose-500 text-white text-[9px] font-bold px-0.5">
+                    <span className="absolute -top-1 -right-1.5 rounded-full w-3 h-3 flex items-center justify-center rounded-full bg-rose-500 text-white text-[9px] font-bold px-0.5">
                       {favCount > 99 ? "99+" : favCount}
                     </span>
                   )}
                 </button>
-                {/* Cart */}
                 <button
                   aria-label={`Cart (${cartCount} items)`}
                   className="relative flex items-center justify-center text-white hover:text-white/80 transition-colors duration-200"
                 >
                   <LuShoppingBag size={24} />
                   {cartCount > 0 ? (
-                    <span className="absolute -top-1 -right-1.5 min-w-[16px] h-4 flex items-center justify-center rounded-full bg-red-500 text-white text-[9px] font-bold px-0.5">
+                    <span className="absolute -top-1 -right-1.5 rounded-ful w-3 h-3 flex items-center justify-center rounded-full bg-red-500 text-white text-[9px] font-bold px-0.5">
                       {cartCount > 99 ? "99+" : cartCount}
                     </span>
                   ) : (
-                    // original static red dot when empty
                     <span className="absolute -top-1 -right-1.5 w-2 h-2 rounded-full bg-red-500" />
                   )}
                 </button>
@@ -168,29 +176,100 @@ export default function Navbar() {
       {/*  MOBILE HEADER (below md)                                    */}
       {/* ───────────────────────────────────────────────────────────── */}
       <header className="md:hidden top-0 z-50 bg-white shadow-sm">
-        {/* ── Mobile Row 1: Logo + Favourite ── */}
         <div className="flex items-center justify-between h-12 px-4 border-b border-gray-100">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 shrink-0">
-            {/* Logo mark */}
             <img alt="Logo" src="/Logo.svg" className="w-10 h-10" />
             <span className="text-white font-bold text-xs">SGL Store</span>
           </a>
 
-          {/* Favourite Icon */}
-          <button
-            aria-label={`Wishlist (${favCount} items)`}
-            className="relative flex items-center justify-center"
-          >
-            <AiOutlineHeart size={24} className="text-[#1b53fe]" />
-            {favCount > 0 && (
-              <span className="absolute -top-1 -right-1.5 min-w-[16px] h-4 flex items-center justify-center rounded-full bg-rose-500 text-white text-[9px] font-bold px-0.5">
-                {favCount > 99 ? "99+" : favCount}
-              </span>
-            )}
-          </button>
+          {/* Right Icons: Heart + Hamburger */}
+          <div className="flex flex-row-reverse items-center gap-1">
+            <button
+              aria-label={`Wishlist (${favCount} items)`}
+              className="relative flex items-center justify-center"
+            >
+              <AiOutlineHeart size={24} className="text-[#1b53fe]" />
+              {favCount > 0 && (
+                <span className="absolute -top-1 -right-1.5 rounded-full min-w-3 h-3 flex items-center justify-center rounded-full bg-rose-500 text-white text-[9px] font-bold px-0.5">
+                  {favCount > 99 ? "99+" : favCount}
+                </span>
+              )}
+            </button>
+
+            <button
+              aria-label="Open menu"
+              onClick={() => setMobileMenuOpen(true)}
+              className="flex items-center justify-center text-[#1b53fe]"
+            >
+              <HiMenuAlt3 size={24} />
+            </button>
+          </div>
         </div>
       </header>
+
+      {/* ───────────────────────────────────────────────────────────── */}
+      {/*  MOBILE SIDE MENU – overlay + panel                          */}
+      {/* ───────────────────────────────────────────────────────────── */}
+      {mobileMenuOpen && (
+        <>
+          {/* Black overlay */}
+          <div
+            className="fixed inset-0 z-[60] bg-black/50 transition-opacity duration-300"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+
+          {/* Slide‑in panel from the right */}
+          <aside
+            className={`fixed top-0 right-0 z-[70] h-full w-72 max-w-[80vw] bg-white shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out ${
+              mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+            }`}
+          >
+            {/* Panel header */}
+            <div className="flex items-center justify-between px-4 h-14 border-b border-gray-100 shrink-0">
+              <h2 className="text-base font-semibold text-gray-900">
+                Categories
+              </h2>
+              <button
+                aria-label="Close menu"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 transition-colors"
+              >
+                <IoClose size={20} className="text-gray-600" />
+              </button>
+            </div>
+            {/* Category list */}
+            <nav className="flex-1 overflow-y-auto py-2">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => handleCategoryTap(cat)}
+                  className={`w-full text-left px-5 py-3 text-sm transition-colors duration-200 ${
+                    activeCategory === cat
+                      ? "bg-[#D0DCFF] text-[#1b53fe] font-semibold border-l-4 border-[#1b53fe]"
+                      : "text-gray-700 hover:bg-gray-50 font-medium"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </nav>
+            {/* <div className="border-t border-gray-100 shrink-0">
+              {navLinks.map((link) => (
+                <a
+                  key={link}
+                  href="#"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-5 py-3 text-sm text-gray-600 hover:text-[#1b53fe] hover:bg-gray-50 transition-colors duration-200"
+                >
+                  {link}
+                </a>
+              ))}
+            </div> */}
+          </aside>
+        </>
+      )}
 
       {/* ── Bottom Navbar (mobile only) ── */}
       <BottomNavbar />

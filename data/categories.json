@@ -28,5 +28,11 @@
     "label": "Macbooks",
     "slug": "macbooks",
     "image": "./Categories/Macbooks.png"
+  },
+  {
+    "id": 6,
+    "label": "Laptop Bags",
+    "slug": "bags",
+    "image": "./Categories/Bags.png"
   }
 ]

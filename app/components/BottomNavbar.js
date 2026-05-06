@@ -59,8 +59,8 @@ const BottomNavbar = () => {
                   {item.icon}
                 </div>
                 <span
-                  className={`text-[13px] font-medium ${
-                    isActive ? "text-primary" : "text-black"
+                  className={`text-[12px] ${
+                    isActive ? "text-primary" : "text-black/80"
                   }`}
                 >
                   {item.label}
