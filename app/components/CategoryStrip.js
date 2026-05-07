@@ -8,12 +8,16 @@ export default function CategoryStrip() {
 
   return (
     <div className="w-full mb-6">
-      <h1 className="text-sm font-semibold text-[#222222] mb-2">
+      <h1
+        className="text-lg md:text-2xl text-[#222222] md:-tight mt-1"
+        style={{ fontWeight: 800 }}
+      >
+        {" "}
         Our Categories
       </h1>
 
-      {/* ── Mobile: 3-column grid, compact fixed height ── */}
-      <div className="md:hidden grid grid-cols-3 gap-2">
+      {/* ── Mobile: 3-column grid ── */}
+      <div className="md:hidden grid grid-cols-4 gap-4">
         {categories.map((cat) => {
           const isActive = active === cat.slug;
           return (
@@ -23,7 +27,7 @@ export default function CategoryStrip() {
               className={`relative overflow-hidden rounded-lg transition-all duration-200 ${
                 isActive ? "ring-2 ring-[#1B53FE]" : ""
               }`}
-              style={{ height: "56px" }}
+              style={{ aspectRatio: "1 / 1" }}
             >
               <img
                 src={cat.image}

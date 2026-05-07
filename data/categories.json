@@ -34,5 +34,17 @@
     "label": "Laptop Bags",
     "slug": "bags",
     "image": "./Categories/Bags.png"
+  },
+  {
+    "id": 7,
+    "label": "Dell Laptops",
+    "slug": "dell",
+    "image": "./Categories/Dell.png"
+  },
+  {
+    "id": 8,
+    "label": "Monitors",
+    "slug": "monitors",
+    "image": "./Categories/Monitors.png"
   }
 ]

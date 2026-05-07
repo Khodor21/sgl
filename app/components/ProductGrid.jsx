@@ -6,24 +6,22 @@ import ProductCard from "./ProductCard";
 
 export default function ProductGrid({
   title,
-  bannerLabel,
   products,
   bannerSrc,
   bannerType = "wide",
 }) {
   const scrollRef = useRef(null);
-
   const isMono = bannerType === "mono";
 
   return (
     <section className="w-full">
-      {/* ── Mono Banner (1.25 : 1.5) + Title side-by-side ── */}
+      {/* ── Mono Banner + Title side-by-side ── */}
       {isMono && bannerSrc && (
         <div className="flex flex-col sm:flex-row items-stretch">
           <div className="sm:w-[28%] w-full rounded-xs overflow-hidden flex-shrink-0">
             <img
               src={bannerSrc}
-              alt={title}
+              alt=""
               className="w-full h-full object-cover"
               style={{ aspectRatio: "1.25 / 1.5" }}
             />
@@ -49,20 +47,20 @@ export default function ProductGrid({
         </div>
       )}
 
-      {/* ── Wide Banner (4 : 1.5) ── */}
+      {/* ── Wide Banner ── */}
       {!isMono && bannerSrc && (
         <div className="mb-5 rounded-xs overflow-hidden">
           <img
             src={bannerSrc}
-            alt={title}
+            alt=""
             className="w-full h-full object-cover"
             style={{ aspectRatio: "2 / 1" }}
           />
         </div>
       )}
 
-      {/* ── Title Row (wide-banner sections only) ── */}
-      {!isMono && (
+      {/* ── Title Row (Shows if NOT a Mono with an image, to avoid duplicating the title) ── */}
+      {!(isMono && bannerSrc) && (
         <div className="mt-4 mb-2 flex items-end justify-between">
           <h2
             className="text-lg md:text-2xl text-[#222222] md:-tight mt-1"

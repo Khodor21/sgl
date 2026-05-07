@@ -157,56 +157,71 @@ const DesktopNavbar = ({
 /* ────────────────────────────────────────────
    MOBILE NAVBAR  (below md)
    ──────────────────────────────────────────── */
-const MobileNavbar = ({ setSearchOpen, favCount, setMobileMenuOpen }) => (
-  <div className="md:hidden sticky top-0 z-50 bg-primary">
-    {/* Row 1 — Logo + Icons */}
-    <div className="px-3 flex items-center justify-between h-14">
-      <a href="/" className="flex items-center gap-2 shrink-0">
-        <img alt="Logo" src="/Logo.svg" className="w-10 h-10" />
-        <div className="flex flex-col leading-tight">
-          <span className="text-white font-bold text-sm">SGL Store</span>
-          <span className="text-white/60 text-[11px] font-medium tracking-wide">
-            laptops & more
-          </span>
-        </div>
-      </a>
+const MobileNavbar = ({ setSearchOpen, favCount, setMobileMenuOpen }) => {
+  const [scrolled, setScrolled] = useState(false);
 
-      <div className="flex items-center">
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div className="md:hidden sticky top-0 z-50 bg-primary">
+      {/* Row 1 — Logo + Icons (collapses on scroll) */}
+      <div
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+          scrolled ? "max-h-0 opacity-0" : "max-h-20 opacity-100"
+        }`}
+      >
+        <div className="px-3 flex items-center justify-between h-14">
+          <a href="/" className="flex items-center gap-2 shrink-0">
+            <img alt="Logo" src="/Logo.svg" className="w-10 h-10" />
+            <div className="flex flex-col leading-tight">
+              <span className="text-white font-bold text-sm">SGL Store</span>
+              <span className="text-white/60 text-[11px] font-medium tracking-wide">
+                laptops & more
+              </span>
+            </div>
+          </a>
+          <div className="flex items-center">
+            <button
+              aria-label={`Wishlist (${favCount} items)`}
+              className="relative flex items-center justify-center text-white p-1"
+            >
+              <AiOutlineHeart size={23} />
+              {favCount > -1 && (
+                <span className="absolute top-0 right-0 w-3 h-3 flex items-center justify-center rounded-full bg-rose-500 text-white text-[8px] font-bold">
+                  {favCount > 9 ? "9+" : favCount}
+                </span>
+              )}
+            </button>
+            <button
+              aria-label="Open menu"
+              onClick={() => setMobileMenuOpen(true)}
+              className="flex items-center justify-center text-white p-1"
+            >
+              <HiMenuAlt3 size={23} />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Row 2 — Search bar (always visible) */}
+      <div className="px-3 pb-2.5 pt-1.5">
         <button
-          aria-label={`Wishlist (${favCount} items)`}
-          className="relative flex items-center justify-center text-white p-1"
+          onClick={() => setSearchOpen(true)}
+          className="flex items-center w-full bg-white rounded h-7 px-3 gap-2 shadow-sm"
         >
-          <AiOutlineHeart size={23} />
-          {favCount > -1 && (
-            <span className="absolute top-0 right-0 w-3 h-3 flex items-center justify-center rounded-full bg-rose-500 text-white text-[8px] font-bold">
-              {favCount > 9 ? "9+" : favCount}
-            </span>
-          )}
-        </button>
-        <button
-          aria-label="Open menu"
-          onClick={() => setMobileMenuOpen(true)}
-          className="flex items-center justify-center text-white p-1"
-        >
-          <HiMenuAlt3 size={23} />
+          <BsSearch size={14} className="text-gray-400 shrink-0" />
+          <span className="text-gray-400 text-sm flex-1 text-left">
+            Search product...
+          </span>
         </button>
       </div>
     </div>
-
-    {/* Row 2 — Search bar (sits directly below, no overlap) */}
-    <div className="px-3 pb-2.5 pt-1.5">
-      <button
-        onClick={() => setSearchOpen(true)}
-        className="flex items-center w-full bg-white rounded h-7 px-3 gap-2 shadow-sm"
-      >
-        <BsSearch size={14} className="text-gray-400 shrink-0" />
-        <span className="text-gray-400 text-sm flex-1 text-left">
-          Search product...
-        </span>
-      </button>
-    </div>
-  </div>
-);
+  );
+};
 
 /* ────────────────────────────────────────────
    MOBILE SIDE MENU  (shared overlay)
