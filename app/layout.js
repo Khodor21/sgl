@@ -9,58 +9,35 @@ import { ShopProvider } from "../context/ShopContext";
 
 export const metadata = {
   title: {
-    default: "SGL Store — Laptops & More",
-    template: "%s | SGL Store",
+    default: "Laptop Store — Laptops & More",
+    template: "%s | Laptop Store",
   },
   description:
-    "Lebanon's trusted destination for premium laptops, computers, and accessories. Shop the best brands at competitive prices.",
+    "Your trusted destination for premium laptops, computers, and accessories. Shop the best brands at competitive prices.",
   keywords: [
     "laptops",
     "computers",
     "accessories",
-    "Lebanon",
-    "SGL Store",
+    "gaming laptops",
+    "Laptop Store",
     "tech",
   ],
-  authors: [{ name: "SGL Store" }],
-  creator: "SGL Store",
-  metadataBase: new URL("https://sglstore.com"), // 🔁 replace with your real domain
+  authors: [{ name: "Laptop Store" }],
+  creator: "Laptop Store",
   openGraph: {
-    title: "SGL Store — Laptops & More",
+    title: "Laptop Store — Laptops & More",
     description:
-      "Lebanon's trusted destination for premium laptops, computers, and accessories.",
-    url: "https://sglstore.com",
-    siteName: "SGL Store",
-    images: [
-      {
-        url: "/og-image.png", // 📁 see image guide below
-        width: 1200,
-        height: 630,
-        alt: "SGL Store – Laptops & More",
-      },
-    ],
+      "Your trusted destination for premium laptops, computers, and accessories.",
+    siteName: "Laptop Store",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "SGL Store — Laptops & More",
+    title: "Laptop Store — Laptops & More",
     description:
-      "Lebanon's trusted destination for premium laptops and computers.",
-    images: ["/og-image.png"],
+      "Your trusted destination for premium laptops and computers.",
   },
-  icons: {
-    icon: [
-      { url: "/favicon.ico" }, // 📁 see image guide below
-      { url: "/icon-16.png", sizes: "16x16", type: "image/png" },
-      { url: "/icon-32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
-    shortcut: "/favicon.ico",
-  },
-  manifest: "/site.webmanifest", // 📁 see guide below
   robots: {
     index: true,
     follow: true,
@@ -68,7 +45,7 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: "#1B53FE", // your brand blue
+  themeColor: "#1B53FE",
   width: "device-width",
   initialScale: 1,
 };

@@ -16,7 +16,7 @@ export default function Home() {
             title="New Arrivals"
             bannerLabel="Just In"
             // bannerSrc="/Mono-Banner 2.jpg"
-            bannerType="mono"
+            // bannerType="mono"
             products={products.filter(
               (p) => p.badge === "New" || p.badge === "Hot",
             )}

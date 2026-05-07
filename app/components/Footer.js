@@ -7,31 +7,11 @@ import {
 import { SiThreads } from "react-icons/si";
 
 const socials = [
-  {
-    icon: FaInstagram,
-    href: "https://instagram.com/sglaptops.shop",
-    label: "Instagram",
-  },
-  {
-    icon: SiThreads,
-    href: "https://threads.net/@sglaptops.shop",
-    label: "Threads",
-  },
-  {
-    icon: FaTiktok,
-    href: "https://tiktok.com/@sglaptops.shop",
-    label: "TikTok",
-  },
-  {
-    icon: FaFacebookF,
-    href: "https://facebook.com/sglaptops.shop",
-    label: "Facebook",
-  },
-  {
-    icon: FaWhatsapp,
-    href: "https://wa.me/96170078131",
-    label: "WhatsApp",
-  },
+  { icon: FaInstagram, href: "#", label: "Instagram" },
+  { icon: SiThreads, href: "#", label: "Threads" },
+  { icon: FaTiktok, href: "#", label: "TikTok" },
+  { icon: FaFacebookF, href: "#", label: "Facebook" },
+  { icon: FaWhatsapp, href: "#", label: "WhatsApp" },
 ];
 
 const columns = [
@@ -58,9 +38,12 @@ export default function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-4 max-w-xs">
             <div className="flex items-center gap-2">
-              <img alt="logo" src="/Logo.svg" className="w-8 h-8" />
+              {/* L Logo */}
+              <span className="w-8 h-8 rounded-md bg-[#1B53FE] flex items-center justify-center text-white font-extrabold text-sm leading-none">
+                L
+              </span>
               <span className="font-extrabold text-[#222222] text-base">
-                SGL <span className="text-[#1B53FE]">Laptops</span>
+                Laptop <span className="text-[#1B53FE]">Store</span>
               </span>
             </div>
             <p className="text-xs text-[#AEAEAE] leading-relaxed">
@@ -75,8 +58,6 @@ export default function Footer() {
               <a
                 key={label}
                 href={href}
-                target="_blank"
-                rel="noopener noreferrer"
                 aria-label={label}
                 className="w-9 h-9 rounded-full border border-[#AEAEAE]/30 flex items-center justify-center text-[#AEAEAE] hover:text-white hover:bg-[#1B53FE] hover:border-[#1B53FE] transition-all duration-200"
               >
@@ -106,7 +87,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-[#AEAEAE]/20 py-5 text-center text-xs text-[#AEAEAE]">
-        © {new Date().getFullYear()} SGL Laptops Shop. All rights reserved.
+        © {new Date().getFullYear()} Laptop Store. All rights reserved.
       </div>
     </footer>
   );

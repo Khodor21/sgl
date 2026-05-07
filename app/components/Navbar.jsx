@@ -15,10 +15,10 @@ const categories = [
   "Dell Laptops",
   "MacBooks",
   "Gaming",
-  "Sgl Mouses",
+  "Mice",
   "Accessories",
   "Laptop Bags",
-  "Monitor",
+  "Monitors",
 ];
 
 const navLinks = ["Home", "Our Location", "Contact Us", "Profile"];
@@ -49,8 +49,10 @@ const DesktopNavbar = ({
         <div className="flex items-center justify-between h-14 gap-4">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 shrink-0">
-            <img alt="Logo" src="/Logo.svg" className="w-10 h-10" />
-            <span className="text-white font-bold text-xs">SGL Store</span>
+            <span className="w-10 h-10 rounded-md bg-white flex items-center justify-center text-primary font-extrabold text-lg leading-none">
+              L
+            </span>
+            <span className="text-white font-bold text-xs">Laptop Store</span>
           </a>
 
           {/* Nav links */}
@@ -178,9 +180,11 @@ const MobileNavbar = ({ setSearchOpen, favCount, setMobileMenuOpen }) => {
       >
         <div className="px-3 flex items-center justify-between h-14">
           <a href="/" className="flex items-center gap-2 shrink-0">
-            <img alt="Logo" src="/Logo.svg" className="w-10 h-10" />
+            <span className="w-10 h-10 rounded-md bg-white flex items-center justify-center text-primary font-extrabold text-lg leading-none">
+              L
+            </span>
             <div className="flex flex-col leading-tight">
-              <span className="text-white font-bold text-sm">SGL Store</span>
+              <span className="text-white font-bold text-sm">Laptop Store</span>
               <span className="text-white/60 text-[11px] font-medium tracking-wide">
                 laptops & more
               </span>
