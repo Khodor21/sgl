@@ -54,7 +54,7 @@ export default function ProductGrid({
             src={bannerSrc}
             alt=""
             className="w-full h-full object-cover"
-            style={{ aspectRatio: "2 / 1" }}
+            style={{ aspectRatio: "4 / 1.8" }}
           />
         </div>
       )}

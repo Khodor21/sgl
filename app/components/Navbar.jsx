@@ -12,14 +12,16 @@ import { useShop } from "../../context/ShopContext";
 const categories = [
   "All Categories",
   "Less than $200",
-  "HP Laptops",
+  "Dell Laptops",
   "MacBooks",
   "Gaming",
   "Sgl Mouses",
   "Accessories",
+  "Laptop Bags",
+  "Monitor",
 ];
 
-const navLinks = ["Home", "About Us", "Contact Us", "Profile"];
+const navLinks = ["Home", "Our Location", "Contact Us", "Profile"];
 
 const popularSearches = [
   "HP Laptop",

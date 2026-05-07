@@ -9,10 +9,9 @@ export default function CategoryStrip() {
   return (
     <div className="w-full mb-6">
       <h1
-        className="text-lg md:text-2xl text-[#222222] md:-tight mt-1"
-        style={{ fontWeight: 800 }}
+        className="text-lg md:text-2xl text-[#222222] md:-tight mt-1 mb-2"
       >
-        {" "}
+      
         Our Categories
       </h1>
 

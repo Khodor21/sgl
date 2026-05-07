@@ -44,7 +44,7 @@
   h1,
   h2 {
     font-family: "Urbanist", sans-serif;
-    font-weight: 600; /* SemiBold */
+    font-weight: 700; /* SemiBold */
   }
 
   h3 {
@@ -79,6 +79,9 @@
   }
   .font-semibold {
     font-weight: 600 !important;
+  }
+  .font-semibold {
+    font-weight: 700 !important;
   }
 
   .no-scrollbar::-webkit-scrollbar {
